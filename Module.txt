@@ -4,7 +4,8 @@ Author: Moov2
 Website: https://moov2.com
 Version: 0.1
 OrchardVersion: 1.10.2
-Description: Improved editor experience offering the control via HTML editor with the ability to switch to a simple WYSIWG experience.
+Description: Improved editor experience.
+Category: Editor
 Features:
     Moov2.Orchard.Editor:
-        Description: Improved editor experience offering the control via HTML editor with the ability to switch to a simple WYSIWG experience.
+        Description: Improved editor experience.

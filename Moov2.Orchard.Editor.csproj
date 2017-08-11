@@ -72,9 +72,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManifest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
+    <Content Include="Assets\JavaScript\orchard.ace.js" />
+    <Content Include="Scripts\ace\ace.js" />
+    <Content Include="Scripts\ace\mode-html.js" />
+    <Content Include="Scripts\ace\theme-monokai.js" />
+    <Content Include="Scripts\orchard.ace.js" />
+    <Content Include="Scripts\orchard.ace.min.js" />
+    <Content Include="Styles\Styles.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Module.txt" />
@@ -90,6 +98,12 @@
       <Name>Orchard.Core</Name>
       <Private>false</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Body-Html.Editor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
