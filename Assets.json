@@ -1,8 +1,9 @@
 [
   {
     "inputs": [
-      "Assets/JavaScript/orchard.ace.js"
+      "Assets/JavaScript/orchard.ace.js",
+      "Assets/JavaScript/orchard.medium.js"
     ],
-    "output": "Scripts/orchard.ace.js"
+    "output": "Scripts/orchard.editor.js"
   }
 ]

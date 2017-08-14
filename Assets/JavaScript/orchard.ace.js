@@ -1,5 +1,5 @@
 ﻿(function () {
-    var editor, session, inputElement;
+    var editor, session, $input;
 
     /**
      * Filters out unwanted annotations (e.g. warning about doctype) due to common
@@ -25,7 +25,7 @@
     var initialise = function () {
         editor = ace.edit('editor');
         session = editor.getSession();
-        inputElement = document.querySelector('.editor-ace-input');
+        $input = document.querySelector('.editor-input');
 
         editor.setTheme('ace/theme/monokai');
         editor.setShowPrintMargin(false);
@@ -35,13 +35,19 @@
 
         session.on('changeAnnotation', filterAnnotation);
         session.on('change', update);
+
+        window.addEventListener('editor:valueUpdate', updateSession);
     };
     
     /**
      * Updates hidden HTML input with latest content from Ace editor.
      */
     var update = function () {
-        inputElement.value = session.getValue();
+        $input.value = session.getValue();
+    };
+
+    var updateSession = function () {
+        session.setValue($input.value);
     };
 
     document.addEventListener('DOMContentLoaded', initialise);

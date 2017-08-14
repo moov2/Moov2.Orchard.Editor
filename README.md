@@ -13,3 +13,9 @@ Improved editor experience offering the control via HTML editor with the ability
 [Ace](https://ace.c9.io/) is a high performance code editor that is ideal for editing raw HTML. 
 
 *Currently using v1.2.8*.
+
+### Medium Editor
+
+[Medium Editor](https://yabwe.github.io/medium-editor/) is a clone of the WYSIWYG editor on Medium.com.
+
+*Currently using v5.23.2*.

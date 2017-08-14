@@ -1,16 +1,24 @@
 ﻿@{ 
-    Style.Require("AceStyles");
-    Script.Require("AceJs");
+    Style.Require("EditorStyles");
+    Script.Require("EditorJs");
 }
 
-<div class="editor">
+<p style="margin-bottom: .3em;"><button type="button" class="js-launch-medium-editor">Open Simple Editor</button></p>
+
+<div class="editor editor--ace">
     @Html.TextArea("Text", (string)Model.Text, 25, 80,
      new Dictionary<string, object> {
         {"id", "editor"},
         {"style", "width:100%"}
      })
-
-    @Html.Hidden("Text", (string)Model.Text, new Dictionary<string, object> {
-        {"class", "editor-ace-input"}
-     })
 </div>
+
+<div class="editor editor--medium js-editor-medium" style="display: none;">
+    <div class="editor__box">
+        <textarea class="medium-editor-textarea js-editor-medium-element"></textarea>
+    </div>
+</div>
+
+@Html.Hidden("Text", (string)Model.Text, new Dictionary<string, object> {
+    {"class", "editor-input"}
+})
