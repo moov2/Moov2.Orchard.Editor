@@ -101,6 +101,9 @@
     <Content Include="Scripts\ace\ace.js" />
     <Content Include="Scripts\ace\mode-html.js" />
     <Content Include="Scripts\ace\theme-monokai.js" />
+    <Content Include="Scripts\ace\worker-html.js" />
+    <Content Include="Scripts\beautify\beautify-html.js" />
+    <Content Include="Scripts\beautify\beautify-html.min.js" />
     <Content Include="Scripts\medium\medium-editor.js" />
     <Content Include="Scripts\medium\medium-editor.min.js" />
     <Content Include="Scripts\orchard.editor.js" />

@@ -25,6 +25,10 @@
     var initialise = function () {
         editor = ace.edit('editor');
         session = editor.getSession();
+
+        //var beautify = ace.require('ace/ext/beautify');
+        //beautify.beautify(session);
+
         $input = document.querySelector('.editor-input');
 
         editor.setTheme('ace/theme/monokai');

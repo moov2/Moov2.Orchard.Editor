@@ -19,3 +19,9 @@ Improved editor experience offering the control via HTML editor with the ability
 [Medium Editor](https://yabwe.github.io/medium-editor/) is a clone of the WYSIWYG editor on Medium.com.
 
 *Currently using v5.23.2*.
+
+### js-beautify
+
+[js-beautify](https://www.npmjs.com/package/js-beautify) reformats and cleans up HTML from Medium editor.
+
+*Currently using v1.6.14*.
