@@ -13,8 +13,9 @@ namespace Moov2.Orchard.Editor
             manifest.DefineStyle("MediumVendorCss").SetUrl("medium/medium-editor.min.css", "medium/medium-editor.css");
             manifest.DefineStyle("MediumVendorCssTheme").SetUrl("medium/themes/default.min.css", "medium/themes/default.css");
 
-            manifest.DefineScript("EditorJs").SetUrl("orchard.editor.min.js", "orchard.editor.js").SetDependencies(new string[] { "AceVendorJs", "MediumVendorJs" });
-            manifest.DefineStyle("EditorStyles").SetUrl("Styles.css").SetDependencies(new string[] { "MediumVendorCss", "MediumVendorCssTheme" });
+            manifest.DefineScript("EditorJs").SetUrl("orchard.editor.min.js", "orchard.editor.js").SetDependencies(new string[] { "AceVendorJs" });
+            manifest.DefineScript("EditorEmbedJs").SetUrl("orchard.medium.embed.min.js", "orchard.medium.embed.js");
+            manifest.DefineStyle("EditorStyles").SetUrl("Styles.css");
         }
     }
 }

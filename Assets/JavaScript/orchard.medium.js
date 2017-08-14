@@ -1,6 +1,6 @@
 ﻿(function () {
     var KEY_ESC = 27;
-    var $editor, $editorElement, editorInstance;
+    var $editor, $iframe;
 
     /**
      * Checks if the user has keyed `ESC` to trigger the editor closing.
@@ -15,14 +15,9 @@
      * Launches the medium editor.
      */
     var hide = function () {
-        $input.value = $editorElement.value
-
-        window.dispatchEvent(new Event('editor:valueUpdate'));
+        sendMessage({ action: 'destroy' });
 
         $editor.style.display = 'none';
-
-        editorInstance.destroy();
-        editorInstance = undefined;
 
         window.removeEventListener('keydown', checkKeyPressForHide);
     };
@@ -33,9 +28,28 @@
     var initialise = function () {
         $editor = document.querySelector('.js-editor-medium');
         $input = document.querySelector('.editor-input');
-        $editorElement = document.querySelector('.js-editor-medium-element');
+        $iframe = document.querySelector('.js-editor-medium-iframe');
 
         document.querySelector('.js-launch-medium-editor').addEventListener('click', show);
+    };
+
+    /**
+     * Received a message from the iframe editor.
+     */
+    var onMessage = function (e) {
+        if (e.data.action === 'close') {
+            $input.value = e.data.value;
+            window.dispatchEvent(new Event('editor:valueUpdate'));
+
+            hide();
+        }
+    };
+
+    /**
+     * Sends a message to the iframe.
+     */
+    var sendMessage = function (msg) {
+        $iframe.contentWindow.postMessage(JSON.stringify(msg), '*');
     };
 
     /**
@@ -44,11 +58,15 @@
     var show = function () {
         window.addEventListener('keydown', checkKeyPressForHide);
 
-        $editorElement.value = $input.value;
-        editorInstance = new MediumEditor($editorElement);
+        // send information to iframe.
+        sendMessage({
+            action: 'initialise',
+            value: $input.value
+        });
 
         $editor.style.display = '';
     };
 
     document.addEventListener('DOMContentLoaded', initialise);
+    window.addEventListener('message', onMessage);
 })();

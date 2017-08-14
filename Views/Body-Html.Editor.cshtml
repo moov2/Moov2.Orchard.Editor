@@ -14,9 +14,7 @@
 </div>
 
 <div class="editor editor--medium js-editor-medium" style="display: none;">
-    <div class="editor__box">
-        <textarea class="medium-editor-textarea js-editor-medium-element"></textarea>
-    </div>
+    <iframe src="/Admin/Editor" class="editor__embed js-editor-medium-iframe" frameborder="0"></iframe>
 </div>
 
 @Html.Hidden("Text", (string)Model.Text, new Dictionary<string, object> {

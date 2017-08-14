@@ -5,5 +5,11 @@
       "Assets/JavaScript/orchard.medium.js"
     ],
     "output": "Scripts/orchard.editor.js"
+  },
+  {
+    "inputs": [
+      "Assets/JavaScript/orchard.medium.embed.js"
+    ],
+    "output": "Scripts/orchard.medium.embed.js"
   }
 ]
