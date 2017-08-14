@@ -1,8 +1,4 @@
-﻿@{
-    Script.Require("EditorEmbedJs").AtFoot();
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -11,6 +7,8 @@
     <link href="/Modules/Moov2.Orchard.Editor/styles/medium/medium-editor.css" rel="stylesheet" type="text/css">
     <link href="/Modules/Moov2.Orchard.Editor/styles/medium/themes/default.css" rel="stylesheet" type="text/css">
     <link href="/Modules/Moov2.Orchard.Editor/Styles/Styles.Medium.css" rel="stylesheet" type="text/css">
+
+    <link href="@string.Format("/Themes/{0}/Styles/Site.css", WorkContext.CurrentTheme.Path)" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="medium-editor">
