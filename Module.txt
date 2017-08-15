@@ -9,3 +9,4 @@ Category: Editor
 Features:
     Moov2.Orchard.Editor:
         Description: Improved editor experience.
+		Dependencies: Orchard.MediaLibrary

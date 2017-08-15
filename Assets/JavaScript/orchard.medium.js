@@ -12,6 +12,13 @@
     };
 
     /**
+     * Returns path for storing media.
+     */
+    var getMediaPath = function () {
+        return document.querySelector('#Body_MediaPath').value;
+    };
+
+    /**
      * Launches the medium editor.
      */
     var hide = function () {
@@ -61,7 +68,8 @@
         // send information to iframe.
         sendMessage({
             action: 'initialise',
-            value: $input.value
+            value: $input.value,
+            mediaPath: getMediaPath()
         });
 
         $editor.style.display = '';

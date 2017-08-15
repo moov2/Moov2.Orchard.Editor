@@ -1,5 +1,6 @@
 ﻿(function () {
-    var KEY_ESC = 27;
+    var KEY_ESC = 27,
+        UPLOAD_MEDIA_URL = '/Admin/Editor/Media';
 
     var editorInstance,
         $element;
@@ -31,12 +32,19 @@
     };
 
     /**
+     * Gets the value.
+     */
+    var getValue = function () {
+        return editorInstance.serialize()[editorInstance.elements[0].id].value;
+    };
+
+    /**
      * Hides the medium editor
      */
     var hide = function () {
         sendMessage({
             action: 'close',
-            value: $element.value
+            value: getValue()
         });
     };
     
@@ -48,6 +56,22 @@
 
         $element.value = data.value;
         editorInstance = new MediumEditor($element);
+
+        $($element).mediumInsert({
+            editor: editorInstance,
+            addons: {
+                images: {
+                    fileUploadOptions: {
+                        url: UPLOAD_MEDIA_URL,
+                        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                        formData: [{
+                            name: 'MediaPath',
+                            value: data.mediaPath
+                        }]
+                    }
+                }
+            }
+        });
     };
 
     /**

@@ -17,6 +17,8 @@
     <iframe src="/Admin/Editor" class="editor__embed js-editor-medium-iframe" frameborder="0"></iframe>
 </div>
 
+@Html.Hidden("MediaPath", (string)Model.ContentItem.ContentType)
+
 @Html.Hidden("Text", (string)Model.Text, new Dictionary<string, object> {
     {"class", "editor-input"}
 })

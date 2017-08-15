@@ -1,21 +1,30 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Script.Require("MediumVendorJs").AtFoot();
+    Script.Require("MediumInsertPluginJs").AtFoot();
+    Script.Require("EditorEmbedJs").AtFoot();
+
+    Style.Require("MediumInsertPluginCss");
+    Style.Require("MediumVendorCss");
+    Style.Require("MediumVendorCssTheme");
+    Style.Require("EditorStyles");
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title></title>
 
-    <link href="/Modules/Moov2.Orchard.Editor/styles/medium/medium-editor.css" rel="stylesheet" type="text/css">
-    <link href="/Modules/Moov2.Orchard.Editor/styles/medium/themes/default.css" rel="stylesheet" type="text/css">
-    <link href="/Modules/Moov2.Orchard.Editor/Styles/Styles.Medium.css" rel="stylesheet" type="text/css">
+    @Display.StylesheetLinks()
 
     <link href="@string.Format("/Themes/{0}/Styles/Site.css", WorkContext.CurrentTheme.Path)" rel="stylesheet" type="text/css">
+
+    @Display.HeadScripts()
 </head>
 <body>
     <div class="medium-editor">
         <textarea class="js-editor-medium-element"></textarea>
     </div>
 
-    <script src="/Modules/Moov2.Orchard.Editor/Scripts/medium/medium-editor.min.js"></script>
-    <script src="/Modules/Moov2.Orchard.Editor/Scripts/orchard.medium.embed.js"></script>
+    @Display.FootScripts()
 </body>
 </html>

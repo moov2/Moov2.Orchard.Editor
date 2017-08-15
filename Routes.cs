@@ -29,6 +29,20 @@ namespace Moov2.Orchard.Editor
                             {"area", "Moov2.Orchard.Editor"}
                         },
                         new MvcRouteHandler())
+                },
+                new RouteDescriptor {
+                    Route = new Route(
+                        "Admin/Editor/Media",
+                        new RouteValueDictionary {
+                            {"area", "Moov2.Orchard.Editor"},
+                            {"controller", "Editor"},
+                            {"action", "Media"}
+                        },
+                        new RouteValueDictionary(),
+                        new RouteValueDictionary {
+                            {"area", "Moov2.Orchard.Editor"}
+                        },
+                        new MvcRouteHandler())
                 }
             };
         }
