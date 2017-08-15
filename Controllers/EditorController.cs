@@ -1,11 +1,10 @@
-﻿using Moov2.Orchard.Editor.ViewModels;
-using Orchard;
+﻿using Orchard;
 using Orchard.ContentManagement;
 using Orchard.MediaLibrary.Services;
 using Orchard.Mvc.AntiForgery;
+using System;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Moov2.Orchard.Editor.Controllers
@@ -49,25 +48,15 @@ namespace Moov2.Orchard.Editor.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryTokenOrchard(false)]
-        public ActionResult Media()
+        public string Media()
         {
-            if (Request.Files.Count == 0)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (Request.Files.Count != 1)
+                throw (new Exception("Request must only contains a single file."));
 
-            var model = new MediaResultViewModel();
-
-            foreach (string fileName in Request.Files)
-            {
-                HttpPostedFileBase file = Request.Files[fileName];
-                var media = _mediaLibraryService.ImportMedia(file.InputStream, GetMediaPath(), file.FileName);
-                _orchardServices.ContentManager.Create(media);
-
-                model.files.Add(new {
-                    url = _mediaLibraryService.GetMediaPublicUrl(media.FolderPath, media.FileName)
-                });
-            }
-
-            return Json(model);
+            var media = _mediaLibraryService.ImportMedia(Request.Files[0].InputStream, GetMediaPath(), Request.Files[0].FileName);
+            _orchardServices.ContentManager.Create(media);
+            
+            return _mediaLibraryService.GetMediaPublicUrl(media.FolderPath, media.FileName);
         }
 
         #endregion

@@ -55,21 +55,17 @@
         window.addEventListener('keydown', checkKeyPressForHide);
 
         $element.value = data.value;
-        editorInstance = new MediumEditor($element);
-
-        $($element).mediumInsert({
-            editor: editorInstance,
-            addons: {
-                images: {
-                    fileUploadOptions: {
-                        url: UPLOAD_MEDIA_URL,
-                        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                        formData: [{
-                            name: 'MediaPath',
-                            value: data.mediaPath
-                        }]
+        editorInstance = new MediumEditor($element, {
+            buttonLabels: 'fontawesome',
+            extensions: {
+                'insert': new MediumEditorInsert({
+                    addons: {
+                        images: {
+                            descriptionPlaceholder: '',
+                            uploadUrl: UPLOAD_MEDIA_URL + '?mediaPath=' + data.mediaPath
+                        }
                     }
-                }
+                })
             }
         });
     };

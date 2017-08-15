@@ -92,7 +92,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Routes.cs" />
-    <Compile Include="ViewModels\MediaResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
@@ -105,28 +104,19 @@
     <Content Include="Scripts\ace\worker-html.js" />
     <Content Include="Scripts\beautify\beautify-html.js" />
     <Content Include="Scripts\beautify\beautify-html.min.js" />
-    <Content Include="Scripts\blueimp\jquery.fileupload.js" />
-    <Content Include="Scripts\blueimp\jquery.iframe-transport.js" />
-    <Content Include="Scripts\blueimp\jquery.ui.widget.js" />
-    <Content Include="Scripts\handlebars\handlebars.runtime.js" />
-    <Content Include="Scripts\handlebars\handlebars.runtime.min.js" />
-    <Content Include="Scripts\jquery-sortable\jquery-sortable.min.js" />
-    <Content Include="Scripts\jquery-sortable\jquery-sortable.js" />
-    <Content Include="Scripts\medium\plugins\medium-editor-insert-plugin.js" />
-    <Content Include="Scripts\medium\plugins\medium-editor-insert-plugin.min.js" />
     <Content Include="Scripts\medium\medium-editor.js" />
     <Content Include="Scripts\medium\medium-editor.min.js" />
+    <Content Include="Scripts\medium\plugins\medium-editor-insert.js" />
+    <Content Include="Scripts\medium\plugins\medium-editor-insert.min.js" />
     <Content Include="Scripts\orchard.editor.js" />
     <Content Include="Scripts\orchard.editor.min.js" />
     <Content Include="Scripts\orchard.medium.embed.js" />
     <Content Include="Scripts\orchard.medium.embed.min.js" />
     <Content Include="Styles\font-awesome\font-awesome.css" />
-    <Content Include="Styles\medium\plugins\medium-editor-insert-plugin-frontend.css" />
-    <Content Include="Styles\medium\plugins\medium-editor-insert-plugin-frontend.min.css" />
-    <Content Include="Styles\medium\plugins\medium-editor-insert-plugin.css" />
-    <Content Include="Styles\medium\plugins\medium-editor-insert-plugin.min.css" />
     <Content Include="Styles\medium\medium-editor.css" />
     <Content Include="Styles\medium\medium-editor.min.css" />
+    <Content Include="Styles\medium\plugins\medium-editor-insert.css" />
+    <Content Include="Styles\medium\plugins\medium-editor-insert.min.css" />
     <Content Include="Styles\medium\themes\beagle.css" />
     <Content Include="Styles\medium\themes\beagle.min.css" />
     <Content Include="Styles\medium\themes\bootstrap.css" />
