@@ -1,15 +1,5 @@
 ﻿(function () {
-    var KEY_ESC = 27;
     var $editor, $iframe;
-
-    /**
-     * Checks if the user has keyed `ESC` to trigger the editor closing.
-     */
-    var checkKeyPressForHide = function (e) {
-        if (e.keyCode === KEY_ESC) {
-            hide();
-        }
-    };
 
     /**
      * Returns path for storing media.
@@ -25,8 +15,6 @@
         sendMessage({ action: 'destroy' });
 
         $editor.style.display = 'none';
-
-        window.removeEventListener('keydown', checkKeyPressForHide);
     };
 
     /**
@@ -63,8 +51,6 @@
      * Launches the medium editor.
      */
     var show = function () {
-        window.addEventListener('keydown', checkKeyPressForHide);
-
         // send information to iframe.
         sendMessage({
             action: 'initialise',

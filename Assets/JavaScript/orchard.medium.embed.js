@@ -60,16 +60,9 @@
         $($element).mediumInsert({
             editor: editorInstance,
             addons: {
-                images: {
-                    fileUploadOptions: {
-                        url: UPLOAD_MEDIA_URL,
-                        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                        formData: [{
-                            name: 'MediaPath',
-                            value: data.mediaPath
-                        }]
-                    }
-                }
+                images: false,
+                embeds: false,
+                orchardMedia: true
             }
         });
     };

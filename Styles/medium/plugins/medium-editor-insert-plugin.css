@@ -115,17 +115,18 @@
       border: 1px solid #ddd;
       line-height: 30px;
       text-align: center;
+      margin: 0;
       padding: 0; }
     .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-show {
       font-size: 25px;
+      margin-top: -.2em;
       -webkit-transform: rotate(0);
           -ms-transform: rotate(0);
               transform: rotate(0);
       -webkit-transition: -webkit-transform 100ms;
               transition: transform 100ms; }
       .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-show span {
-        display: block;
-        margin-top: -4px; }
+        display: block; }
       .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-show.medium-insert-buttons-rotate {
         -webkit-transition: -webkit-transform 250ms;
                 transition: transform 250ms;

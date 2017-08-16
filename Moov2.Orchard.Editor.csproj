@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
+    <Content Include="Assets\JavaScript\medium\plugins\medium-editor-insert-media-plugin.js" />
     <Content Include="Assets\JavaScript\orchard.ace.js" />
     <Content Include="Assets\JavaScript\orchard.medium.embed.js" />
     <Content Include="Assets\JavaScript\orchard.medium.js" />
@@ -112,6 +113,8 @@
     <Content Include="Scripts\handlebars\handlebars.runtime.min.js" />
     <Content Include="Scripts\jquery-sortable\jquery-sortable.min.js" />
     <Content Include="Scripts\jquery-sortable\jquery-sortable.js" />
+    <Content Include="Scripts\medium\plugins\medium-editor-insert-media-plugin.js" />
+    <Content Include="Scripts\medium\plugins\medium-editor-insert-media-plugin.min.js" />
     <Content Include="Scripts\medium\plugins\medium-editor-insert-plugin.js" />
     <Content Include="Scripts\medium\plugins\medium-editor-insert-plugin.min.js" />
     <Content Include="Scripts\medium\medium-editor.js" />

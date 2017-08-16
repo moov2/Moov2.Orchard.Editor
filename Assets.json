@@ -11,5 +11,11 @@
       "Assets/JavaScript/orchard.medium.embed.js"
     ],
     "output": "Scripts/orchard.medium.embed.js"
+  },
+  {
+    "inputs": [
+      "Assets/JavaScript/medium/plugins/medium-editor-insert-media-plugin.js"
+    ],
+    "output": "Scripts/medium/plugins/medium-editor-insert-media-plugin.js"
   }
 ]

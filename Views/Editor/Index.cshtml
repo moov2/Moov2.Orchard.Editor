@@ -1,8 +1,10 @@
 ﻿@{
+    Script.Require("jQueryColorBox");
     Script.Require("MediumVendorJs").AtFoot();
     Script.Require("MediumInsertPluginJs").AtFoot();
     Script.Require("EditorEmbedJs").AtFoot();
 
+    Style.Require("jQueryColorBox");
     Style.Require("MediumInsertPluginCss");
     Style.Require("MediumVendorCss");
     Style.Require("MediumVendorCssTheme");
@@ -17,6 +19,15 @@
     @Display.StylesheetLinks()
 
     <link href="@string.Format("/Themes/{0}/Styles/Site.css", WorkContext.CurrentTheme.Path)" rel="stylesheet" type="text/css">
+
+    <style>
+        figure figcaption {
+            font-size: 12px;
+            line-height: 1.2em;
+            margin-top: 1em;
+            min-height: 1.2em;
+        }
+    </style>
 
     @Display.HeadScripts()
 </head>
