@@ -84,11 +84,11 @@
     };
 
 
-    OrchardMedia.prototype.addImage = function (image) {
+    OrchardMedia.prototype.addImage = function (image, isSelect) {
         var $place = this.$el.find('.medium-insert-active');
 
         if ($place.is('p')) {
-            $place.replaceWith('<figure class="medium-insert-active">' + $place.html() + '</div>');
+            $place.replaceWith('<figure class="medium-insert-active">' + $place.html() + '</figure>');
             $place = this.$el.find('.medium-insert-active');
 
             if ($place.next().is('p')) {
@@ -97,16 +97,25 @@
                 $place.after('<p><br></p>'); // add empty paragraph so we can move the caret to the next line.
                 this.core.moveCaret($place.next());
             }
+        } else {
+            var $figure = $('<figure class="medium-insert-active"></figure>');
+            $place.after($figure);
+            $place = $figure;
         }
 
         $place.find('br').remove();
-        $place.append('\n\t<img src="' + image.resource + '" alt="' + image.alternateText + '" />');
+        $place.append('\n\t<img src="' + image.resource + '" alt="' + (image.alternateText || '') + '" />');
 
         if (image.caption) {
             $place.append('\n\t<figcaption contenteditable="true">' + image.caption + '</figcaption>');
         }
 
         this.core.triggerInput();
+
+        if (!isSelect) {
+            return;
+        }
+
         this.core.hideButtons();
 
         $place.find('img').click();
@@ -116,7 +125,7 @@
         for (var i = 0; i < mediaCollection.length; i++) {
             switch (mediaCollection[i].contentType) {
                 case 'Image':
-                    this.addImage(mediaCollection[i]);
+                    this.addImage(mediaCollection[i], i + 1 === mediaCollection.length);
                     break;
                 default:
                     continue;
