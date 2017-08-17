@@ -1,0 +1,4 @@
+﻿#: "~/Modules/Moov2.Orchard.Editor/Views/Body-Html.Editor.cshtml"
+#| msgid "Open Simple Editor"
+msgid "Open Simple Editor"
+msgstr "Ouvrir l'éditeur Simple"
