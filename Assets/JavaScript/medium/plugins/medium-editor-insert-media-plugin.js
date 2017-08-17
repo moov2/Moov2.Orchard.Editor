@@ -105,10 +105,10 @@
         }
 
         $place.find('br').remove();
-        $place.append('\n\t<img src="' + image.resource + '" alt="' + (image.alternateText || '') + '" />');
+        $place.append('\n\t<img src="' + image.resource + '" alt="' + (image.alternateText || '') + '" />\n');
 
         if (image.caption) {
-            $place.append('\n\t<figcaption contenteditable="true">' + image.caption + '</figcaption>');
+            $place.append('\t<figcaption contenteditable="true">' + image.caption + '</figcaption>\n');
         }
 
         this.core.triggerInput();
