@@ -1,5 +1,5 @@
 ﻿(function () {
-    var $editor, $iframe;
+    var $editor, $iframe, $html;
 
     /**
      * Returns path for storing media.
@@ -14,6 +14,8 @@
     var hide = function () {
         sendMessage({ action: 'destroy' });
 
+        $html.style.overflow = '';
+
         $editor.style.display = 'none';
     };
 
@@ -24,6 +26,7 @@
         $editor = document.querySelector('.js-editor-medium');
         $input = document.querySelector('.editor-input');
         $iframe = document.querySelector('.js-editor-medium-iframe');
+        $html = document.querySelector('html');
 
         document.querySelector('.js-launch-medium-editor').addEventListener('click', show);
     };
@@ -58,6 +61,7 @@
             mediaPath: getMediaPath()
         });
 
+        $html.style.overflow = 'hidden';
         $editor.style.display = '';
     };
 

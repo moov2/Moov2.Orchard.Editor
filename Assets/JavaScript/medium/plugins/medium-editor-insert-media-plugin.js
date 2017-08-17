@@ -69,7 +69,6 @@
             onLoad: function () {
                 // hide the scrollbars from the main window
                 $('html, body').css('overflow', 'hidden');
-
             },
             onClosed: function () {
                 var selectedData = $.colorbox.selectedData;
@@ -79,6 +78,8 @@
                 }
 
                 _this.addMedia(selectedData);
+
+                $('html, body').css('overflow', '');
             }
         });
     };
