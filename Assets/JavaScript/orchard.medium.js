@@ -39,7 +39,7 @@
          */
         var onMessage = function (e) {
             if (e.data.action === 'close') {
-                $input.value = html_beautify ? html_beautify(e.data.value) : e.data.value;
+                $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 window.dispatchEvent(new Event('editor:valueUpdate'));
 
                 hide();
