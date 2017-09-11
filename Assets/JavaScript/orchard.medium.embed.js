@@ -3,13 +3,26 @@
         UPLOAD_MEDIA_URL = '/Admin/Editor/Media';
 
     var editorInstance,
-        $element;
+        $element, $applyBtn, $discardBtn, $state;
+
+    /**
+     * Apply changes and hide editor.
+     */
+    var apply = function () {
+        sendMessage({
+            action: 'apply',
+            value: getValue()
+        });
+    };
 
     /**
      * Store DOM elements in variables.
      */
     var cacheDom = function () {
         $element = document.querySelector('.js-editor-medium-element');
+        $applyBtn = document.querySelector('.js-apply-changes');
+        $discardBtn = document.querySelector('.js-discard-changes');
+        $state = document.querySelector('.js-state');
     };
 
     /**
@@ -17,7 +30,7 @@
      */
     var checkKeyPressForHide = function (e) {
         if (e.keyCode === KEY_ESC) {
-            hide();
+            apply();
         }
     };
 
@@ -32,20 +45,20 @@
     };
 
     /**
+     * Sends message to parent to discard the changes and close the editor.
+     */
+    var discard = function () {
+        sendMessage({
+            action: 'discard',
+            value: getValue()
+        });
+    }
+
+    /**
      * Gets the value.
      */
     var getValue = function () {
         return editorInstance.serialize()[editorInstance.elements[0].id].value;
-    };
-
-    /**
-     * Hides the medium editor
-     */
-    var hide = function () {
-        sendMessage({
-            action: 'close',
-            value: getValue()
-        });
     };
     
     /**
@@ -53,7 +66,10 @@
      */
     var initialise = function (data) {
         window.addEventListener('keydown', checkKeyPressForHide);
+        $applyBtn.addEventListener('click', apply)
+        $discardBtn.addEventListener('click', discard)
 
+        $state.innerHTML = data.state;
         $element.value = data.value;
         editorInstance = new MediumEditor($element);
 

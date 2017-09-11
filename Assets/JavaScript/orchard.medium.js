@@ -3,11 +3,34 @@
         var $editor, $html, $iframe, $input;
 
         /**
-         * Returns path for storing media.
+         * Returns the type of content
          */
-        var getMediaPath = function () {
-            return document.querySelector('#Body_MediaPath').value;
+        var getContentType = function () {
+            return document.querySelector('.js-editor-content-type').value;
         };
+
+        /**
+         * Gets the `state`, which is a text representation of what the
+         * user is editing.
+         */
+        var getState = function () {
+            var $title = document.querySelector('#Title_Title'),
+                $url = document.querySelector('#AutoroutePart_CurrentUrl'),
+                contentType = getContentType(),
+                state = '';
+
+            if ($title) {
+                state += ($url && $url.value) ? '<a href="/' + $url.value + '" target="_blank" title="View current page">' + $title.value + '</a>' : $title.value;
+            } else {
+                return 'HTML Element within Layout'
+            }
+
+            if (contentType && contentType !== 'LayoutElement') {
+                state += ' (' + contentType + ')';
+            }
+
+            return state || 'Unknown';
+        }
 
         /**
          * Launches the medium editor.
@@ -38,10 +61,12 @@
          * Received a message from the iframe editor.
          */
         var onMessage = function (e) {
-            if (e.data.action === 'close') {
+            if (e.data.action === 'apply') {
                 $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 window.dispatchEvent(new Event('editor:valueUpdate'));
+            }
 
+            if (e.data.action === 'apply' || e.data.action === 'discard') {
                 hide();
             }
         };
@@ -61,7 +86,8 @@
             sendMessage({
                 action: 'initialise',
                 value: $input.value,
-                mediaPath: getMediaPath()
+                mediaPath: getContentType(),
+                state: getState()
             });
 
             window.addEventListener('message', onMessage);

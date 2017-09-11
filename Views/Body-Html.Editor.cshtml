@@ -2,6 +2,8 @@
     Style.Require("EditorStyles");
     Script.Require("EditorJs");
 
+    var model = Model;
+
     var editorId = Guid.NewGuid();
 }
 
@@ -20,7 +22,7 @@
         <iframe src="/Admin/Editor" class="editor__embed js-editor-medium-iframe" frameborder="0"></iframe>
     </div>
 
-    @Html.Hidden("MediaPath", (string)Model.ContentItem.ContentType)
+    @Html.Hidden("ContentType", Model.ContentItem != null ? (string)Model.ContentItem.ContentType : "LayoutElement", new { @class = "js-editor-content-type" })
 
     @Html.Hidden("Text", (string)Model.Text, new Dictionary<string, object> {
         {"class", "editor-input"}
