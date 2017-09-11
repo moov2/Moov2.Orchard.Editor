@@ -1,24 +1,28 @@
 ﻿@{ 
     Style.Require("EditorStyles");
     Script.Require("EditorJs");
+
+    var editorId = Guid.NewGuid();
 }
 
-<p style="margin-bottom: .3em;"><button type="button" class="js-launch-medium-editor">@T("Open Simple Editor")</button></p>
+<div class="js-editor">
+    <p style="margin-bottom: .3em;"><button type="button" class="js-launch-medium-editor">@T("Open Simple Editor")</button></p>
 
-<div class="editor editor--ace">
-    @Html.TextArea("Text", (string)Model.Text, 25, 80,
-     new Dictionary<string, object> {
-        {"id", "editor"},
-        {"style", "width:100%"}
-     })
+    <div class="editor editor--ace">
+        @Html.TextArea("Text", (string)Model.Text, 25, 80,
+         new Dictionary<string, object> {
+            {"id", string.Format("editor-{0}", editorId)},
+            {"style", "width:100%"}
+         })
+    </div>
+
+    <div class="editor editor--medium js-editor-medium" style="display: none;">
+        <iframe src="/Admin/Editor" class="editor__embed js-editor-medium-iframe" frameborder="0"></iframe>
+    </div>
+
+    @Html.Hidden("MediaPath", (string)Model.ContentItem.ContentType)
+
+    @Html.Hidden("Text", (string)Model.Text, new Dictionary<string, object> {
+        {"class", "editor-input"}
+    })
 </div>
-
-<div class="editor editor--medium js-editor-medium" style="display: none;">
-    <iframe src="/Admin/Editor" class="editor__embed js-editor-medium-iframe" frameborder="0"></iframe>
-</div>
-
-@Html.Hidden("MediaPath", (string)Model.ContentItem.ContentType)
-
-@Html.Hidden("Text", (string)Model.Text, new Dictionary<string, object> {
-    {"class", "editor-input"}
-})
