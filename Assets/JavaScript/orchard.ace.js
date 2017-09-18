@@ -45,6 +45,7 @@
             session.on('changeAnnotation', filterAnnotation);
             session.on('change', update);
 
+            $input.addEventListener('change', updateSession);
             window.addEventListener('editor:valueUpdate', updateSession);
         };
 
