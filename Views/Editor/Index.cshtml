@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Moov2.Orchard.Editor.Models.EditorSettingsPart
+@{
     Script.Require("jQueryColorBox");
     Script.Require("MediumVendorJs").AtFoot();
     Script.Require("MediumInsertPluginJs").AtFoot();
@@ -46,6 +47,7 @@
 
     <div class="medium-editor">
         <textarea class="js-editor-medium-element"></textarea>
+        <input type="hidden" class="js-editor-custom-css" value="@Model.ContainerCss" />
     </div>
 
     @Display.FootScripts()

@@ -1,0 +1,11 @@
+﻿@model Moov2.Orchard.Editor.Models.EditorSettingsPart
+
+<fieldset>
+    <legend>@T("Editor Settings")</legend>
+
+    <div>
+        <label for="@Html.FieldIdFor(m => m.ContainerCss)">@T("Container Css")</label>
+        @Html.TextBoxFor(m => m.ContainerCss, new { @class = "text large" })
+        <span class="hint">@T("Custom CSS applied to container of simple editor. Use spaces to separate multiple CSS classes.")</span>
+    </div>
+</fieldset>

@@ -1,4 +1,5 @@
-﻿using Moov2.Orchard.Editor.ViewModels;
+﻿using Moov2.Orchard.Editor.Models;
+using Moov2.Orchard.Editor.ViewModels;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.MediaLibrary.Services;
@@ -44,7 +45,7 @@ namespace Moov2.Orchard.Editor.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(_orchardServices.WorkContext.CurrentSite.As<EditorSettingsPart>());
         }
 
         [HttpPost]

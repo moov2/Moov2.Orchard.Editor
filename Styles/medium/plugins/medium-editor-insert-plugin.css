@@ -90,8 +90,6 @@
     content: " ";
     display: table;
     clear: both; }
-  .medium-editor-insert-plugin p {
-    margin: 1em 0; }
   .medium-editor-insert-plugin progress {
     display: block;
     margin: 1em auto; }

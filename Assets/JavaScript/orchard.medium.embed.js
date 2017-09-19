@@ -3,7 +3,7 @@
         UPLOAD_MEDIA_URL = '/Admin/Editor/Media';
 
     var editorInstance,
-        $element, $applyBtn, $discardBtn, $state;
+        $element, $applyBtn, $discardBtn, $state, $contentCss;
 
     /**
      * Apply changes and hide editor.
@@ -23,6 +23,7 @@
         $applyBtn = document.querySelector('.js-apply-changes');
         $discardBtn = document.querySelector('.js-discard-changes');
         $state = document.querySelector('.js-state');
+        $contentCss = document.querySelector('.js-editor-custom-css');
     };
 
     /**
@@ -72,6 +73,10 @@
         $state.innerHTML = data.state;
         $element.value = data.value;
         editorInstance = new MediumEditor($element);
+
+        if ($contentCss.value !== '') {
+            editorInstance.elements[0].className += ' ' + $contentCss.value;
+        }
 
         $($element).mediumInsert({
             editor: editorInstance,
