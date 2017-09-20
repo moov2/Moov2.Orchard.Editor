@@ -19,7 +19,7 @@ namespace Moov2.Orchard.Editor
             manifest.DefineScript("jQueryFileUpload").SetUrl("blueimp/jquery.fileupload.js");
             manifest.DefineStyle("FontAwesome").SetUrl("font-awesome/font-awesome.css").SetCdn("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
-            manifest.DefineScript("MediumInsertMediaPluginJs").SetUrl("medium/plugins/medium-editor-insert-plugin.min.js", "medium/plugins/medium-editor-insert-media-plugin.js");
+            manifest.DefineScript("MediumInsertMediaPluginJs").SetUrl("medium/plugins/medium-editor-insert-media-plugin.min.js", "medium/plugins/medium-editor-insert-media-plugin.js");
             manifest.DefineScript("MediumInsertPluginJs").SetUrl("medium/plugins/medium-editor-insert-plugin.min.js", "medium/plugins/medium-editor-insert-plugin.js").SetDependencies("jQuery", "Handlebars", "jQuerySortable", "jQueryWidget", "jQueryIFrameTransport", "jQueryFileUpload", "MediumInsertMediaPluginJs");
             manifest.DefineStyle("MediumInsertPluginCss").SetUrl("medium/plugins/medium-editor-insert-plugin.min.css", "medium/plugins/medium-editor-insert-plugin.css").SetDependencies("FontAwesome");
 
