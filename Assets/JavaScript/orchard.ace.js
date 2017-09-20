@@ -38,6 +38,7 @@
 
             editor.setTheme('ace/theme/monokai');
             editor.setShowPrintMargin(false);
+            editor.$blockScrolling = Infinity;
 
             session.setMode('ace/mode/html');
             session.setUseWrapMode(true);
