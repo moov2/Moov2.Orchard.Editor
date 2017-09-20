@@ -3,14 +3,14 @@
         UPLOAD_MEDIA_URL = '/Admin/Editor/Media';
 
     var editorInstance,
-        $element, $applyBtn, $discardBtn, $state, $contentCss;
+        $element, $closeBtn, $state, $contentCss;
 
     /**
-     * Apply changes and hide editor.
+     * Hides thed editor.
      */
-    var apply = function () {
+    var close = function () {
         sendMessage({
-            action: 'apply',
+            action: 'close',
             value: getValue()
         });
     };
@@ -20,8 +20,7 @@
      */
     var cacheDom = function () {
         $element = document.querySelector('.js-editor-medium-element');
-        $applyBtn = document.querySelector('.js-apply-changes');
-        $discardBtn = document.querySelector('.js-discard-changes');
+        $closeBtn = document.querySelector('.js-close-btn');
         $state = document.querySelector('.js-state');
         $contentCss = document.querySelector('.js-editor-custom-css');
     };
@@ -31,7 +30,7 @@
      */
     var checkKeyPressForHide = function (e) {
         if (e.keyCode === KEY_ESC) {
-            apply();
+            close();
         }
     };
 
@@ -46,16 +45,6 @@
     };
 
     /**
-     * Sends message to parent to discard the changes and close the editor.
-     */
-    var discard = function () {
-        sendMessage({
-            action: 'discard',
-            value: getValue()
-        });
-    }
-
-    /**
      * Gets the value.
      */
     var getValue = function () {
@@ -67,12 +56,13 @@
      */
     var initialise = function (data) {
         window.addEventListener('keydown', checkKeyPressForHide);
-        $applyBtn.addEventListener('click', apply)
-        $discardBtn.addEventListener('click', discard)
+        $closeBtn.addEventListener('click', close)
 
         $state.innerHTML = data.state;
         $element.value = data.value;
         editorInstance = new MediumEditor($element);
+
+        editorInstance.subscribe('editableInput', update);
 
         if ($contentCss.value !== '') {
             editorInstance.elements[0].className += ' ' + $contentCss.value;
@@ -108,6 +98,16 @@
      */
     var sendMessage = function (msg) {
         window.parent.postMessage(msg, '*');
+    };
+
+    /**
+     * Sends message to parent window to update value.
+     */
+    var update = function () {
+        sendMessage({
+            action: 'update',
+            value: getValue()
+        });
     };
     
     document.addEventListener('DOMContentLoaded', cacheDom);

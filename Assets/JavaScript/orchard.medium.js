@@ -61,12 +61,12 @@
          * Received a message from the iframe editor.
          */
         var onMessage = function (e) {
-            if (e.data.action === 'apply') {
+            if (e.data.action === 'update') {
                 $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 window.dispatchEvent(new Event('editor:valueUpdate'));
             }
 
-            if (e.data.action === 'apply' || e.data.action === 'discard') {
+            if (e.data.action === 'close') {
                 hide();
             }
         };
