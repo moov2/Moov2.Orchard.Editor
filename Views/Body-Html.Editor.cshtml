@@ -1,8 +1,12 @@
-﻿@{ 
+﻿@using Orchard.ContentManagement
+@using Moov2.Orchard.Editor.Models
+
+@{
     Style.Require("EditorStyles");
     Script.Require("EditorJs");
 
     var model = Model;
+    var patternLibraryUrl = WorkContext.CurrentSite.As<EditorSettingsPart>().PatternLibraryUrl;
 
     var editorId = Guid.NewGuid();
 }
@@ -19,8 +23,9 @@
                     <span> @T("Visual Editor")</span>
                 </button>
             </li>
+            @if (!string.IsNullOrWhiteSpace(patternLibraryUrl)) {
             <li class="align-right icon-reverse">
-                <a href="#" target="_blank">
+                <a href="@patternLibraryUrl" target="_blank">
                     <span>@T("Open Pattern Library") </span>
                     <svg fill="#ffffff" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0h24v24H0z" fill="none" />
@@ -28,6 +33,7 @@
                     </svg>
                 </a>
             </li>
+            }
         </ul>
     </div>
 
