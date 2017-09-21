@@ -10,13 +10,13 @@ namespace Moov2.Orchard.Editor.Models
         public string ContainerCss
         {
             get { return this.As<InfosetPart>().Get<EditorSettingsPart>("ContainerCss"); }
-            set { this.As<InfosetPart>().Set<EditorSettingsPart>("ContainerCss", value.ToString()); }
+            set { this.As<InfosetPart>().Set<EditorSettingsPart>("ContainerCss", string.IsNullOrEmpty(value) ? string.Empty : value.ToString()); }
         }
 
         public string PatternLibraryUrl
         {
             get { return this.As<InfosetPart>().Get<EditorSettingsPart>("PatternLibraryUrl"); }
-            set { this.As<InfosetPart>().Set<EditorSettingsPart>("PatternLibraryUrl", value.ToString()); }
+            set { this.As<InfosetPart>().Set<EditorSettingsPart>("PatternLibraryUrl", string.IsNullOrEmpty(value) ? string.Empty : value.ToString()); }
         }
     }
 }
