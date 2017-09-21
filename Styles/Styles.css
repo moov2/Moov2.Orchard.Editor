@@ -97,6 +97,84 @@
                 text-decoration: none;
             }
 
+.editor-toolbar-ace {
+    display: block;
+    padding: .75em 1.5em;
+    background-color: #2f3129;
+    color: #aec3ce;
+}
+
+    .editor-toolbar-ace ul {
+        align-items: flex-start;
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .editor-toolbar-ace button,
+    .editor-toolbar-ace a,
+    .editor-toolbar-ace a:link,
+    .editor-toolbar-ace a:visited {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        color: #aec3ce;
+        display: block;
+        font: inherit;
+        line-height: 18px;
+        padding: 0;
+    }
+
+        .editor-toolbar-ace a:active,
+        .editor-toolbar-ace a:focus,
+        .editor-toolbar-ace a:hover,
+        .editor-toolbar-ace button:active,
+        .editor-toolbar-ace button:focus,
+        .editor-toolbar-ace button:hover {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            color: #fff;
+        }
+
+        .editor-toolbar-ace a:active svg,
+        .editor-toolbar-ace a:focus svg,
+        .editor-toolbar-ace a:hover svg,
+        .editor-toolbar-ace button:active svg,
+        .editor-toolbar-ace button:focus svg,
+        .editor-toolbar-ace button:hover svg {
+            fill: #fff;
+        } 
+
+        .editor-toolbar-ace ul > li {
+            flex: 0 1 auto;
+            margin-right: 1em;
+        }
+
+        .editor-toolbar-ace ul > li.align-right {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+            .editor-toolbar-ace svg {
+                fill: #aec3ce;
+                margin-right: 4px;
+                vertical-align: middle;
+            }
+
+            .editor-toolbar-ace ul > li.icon-reverse svg {
+                margin-left: 4px;
+                margin-right: 0;
+            }
+
+            .editor-toolbar-ace li svg,
+            .editor-toolbar-ace li span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
 .medium-editor {
     box-sizing: border-box;
     display: block;

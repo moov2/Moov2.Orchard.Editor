@@ -104,6 +104,7 @@
     <Content Include="Assets\JavaScript\orchard.ace.js" />
     <Content Include="Assets\JavaScript\orchard.medium.embed.js" />
     <Content Include="Assets\JavaScript\orchard.medium.js" />
+    <Content Include="Content\icon-face.svg" />
     <Content Include="Scripts\ace\ace.js" />
     <Content Include="Scripts\ace\mode-html.js" />
     <Content Include="Scripts\ace\theme-monokai.js" />
@@ -187,6 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
