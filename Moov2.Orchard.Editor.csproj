@@ -103,9 +103,10 @@
     <Content Include="Assets\JavaScript\medium\plugins\medium-editor-insert-media-plugin.js" />
     <Content Include="Assets\JavaScript\orchard.ace.js" />
     <Content Include="Assets\JavaScript\orchard.medium.embed.js" />
-    <Content Include="Assets\JavaScript\orchard.medium.js" />
+    <Content Include="Assets\JavaScript\orchard.editor.js" />
     <Content Include="Content\icon-face.svg" />
-    <Content Include="Content\open-in-new.svg" />
+    <Content Include="Content\icon-insert-photo.svg" />
+    <Content Include="Content\icon-open-in-new.svg" />
     <Content Include="Scripts\ace\ace.js" />
     <Content Include="Scripts\ace\mode-html.js" />
     <Content Include="Scripts\ace\theme-monokai.js" />

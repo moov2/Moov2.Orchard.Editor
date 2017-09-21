@@ -33,6 +33,22 @@
         }
 
         /**
+         * User has clicked an action within the toolbar.
+         */
+        var handleAction = function (e) {
+            var action = e.currentTarget.getAttribute('data-action');
+
+            switch (action) {
+                case 'open-visual-editor':
+                    openVisualEditor();
+                    break;
+                case 'insert-media':
+                    openMediaPicker();
+                    break;
+            }
+        }
+
+        /**
          * Launches the medium editor.
          */
         var hide = function () {
@@ -54,7 +70,11 @@
             $iframe = $el.querySelector('.js-editor-medium-iframe');
             $html = document.querySelector('html');
 
-            $el.querySelector('.js-launch-medium-editor').addEventListener('click', show);
+            var $actions = $el.querySelectorAll('.js-toolbar-btn');
+
+            for (var i = 0; i < $actions.length; i++) {
+                $actions[i].addEventListener('click', handleAction);
+            }
         };
 
         /**
@@ -63,7 +83,7 @@
         var onMessage = function (e) {
             if (e.data.action === 'update') {
                 $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
-                window.dispatchEvent(new Event('editor:valueUpdate'));
+                $el.dispatchEvent(new Event('editor:valueUpdate'));
             }
 
             if (e.data.action === 'close') {
@@ -72,16 +92,51 @@
         };
 
         /**
-         * Sends a message to the iframe.
+         * Opens media library picker.
          */
-        var sendMessage = function (msg) {
-            $iframe.contentWindow.postMessage(JSON.stringify(msg), '*');
+        var openMediaPicker = function () {
+            var adminIndex = location.href.toLowerCase().indexOf("/admin/"),
+                _this = this,
+                url;
+
+            if (adminIndex === -1) {
+                return;
+            }
+
+            url = location.href.substr(0, adminIndex) + "/Admin/Orchard.MediaLibrary?dialog=true";
+
+            $.colorbox({
+                href: url,
+                iframe: true,
+                reposition: true,
+                width: '90%',
+                height: '90%',
+                onLoad: function () {
+                    // hide the scrollbars from the main window
+                    $('html, body').css('overflow', 'hidden');
+                },
+                onClosed: function () {
+                    var selectedData = $.colorbox.selectedData;
+
+                    $('html, body').css('overflow', '');
+
+                    if (selectedData.length === 0) {
+                        return;
+                    }
+                    
+                    $el.dispatchEvent(new CustomEvent('editor:addMedia', {
+                        detail: {
+                            mediaItems: selectedData
+                        }
+                    }));
+                }
+            });
         };
 
         /**
          * Launches the medium editor.
          */
-        var show = function () {
+        var openVisualEditor = function () {
             // send information to iframe.
             sendMessage({
                 action: 'initialise',
@@ -94,6 +149,13 @@
 
             $html.style.overflow = 'hidden';
             $editor.style.display = '';
+        };
+
+        /**
+         * Sends a message to the iframe.
+         */
+        var sendMessage = function (msg) {
+            $iframe.contentWindow.postMessage(JSON.stringify(msg), '*');
         };
 
         init()

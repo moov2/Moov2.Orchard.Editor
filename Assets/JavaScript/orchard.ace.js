@@ -3,6 +3,28 @@
         var editor, session, $input;
 
         /**
+         * Add provided media to editor, dictated by current ace editor selection state.
+         */
+        var addMedia = function (e) {
+            if (!e || !e.detail || !e.detail.mediaItems) {
+                return;
+            }
+
+            var alt, cursorPosition, line, url;
+
+            for (var i = 0; i < e.detail.mediaItems.length; i++) {
+                switch (e.detail.mediaItems[i].contentType.toLowerCase()) {
+                    case 'document':
+                        insertDocument(e.detail.mediaItems[i]);
+                        break;
+                    case 'image':
+                        insertImage(e.detail.mediaItems[i]);
+                        break;
+                }
+            }
+        };
+
+        /**
          * Filters out unwanted annotations (e.g. warning about doctype) due to common
          * case is the HTML being edited is not a full HTML document but a piece of HTML.
          */
@@ -47,7 +69,76 @@
             session.on('change', update);
 
             $input.addEventListener('change', updateSession);
-            window.addEventListener('editor:valueUpdate', updateSession);
+            $el.addEventListener('editor:valueUpdate', updateSession);
+            $el.addEventListener('editor:addMedia', addMedia);
+        };
+
+        /**
+         * Inserts hyperlink for document.
+         */
+        var insertDocument = function(asset) {
+            var cursorPosition = editor.selection.getRange().start,
+                line = editor.session.getLine(cursorPosition.row);
+
+            // inserting media URL between two quotes
+            if (line.substr(cursorPosition.column - 5, 5).toLowerCase() === 'href="') {
+                editor.insert(asset.resource);
+                return;
+            }
+
+            // inserting media URL with quotes
+            if (line.substr(cursorPosition.column - 4, 4).toLowerCase() === 'href=') {
+                editor.insert('"' + asset.resource + '"');
+                return;
+            }
+
+            // ensure that the current cursor position warrants a complete anchor HTML
+            // tag instead of the URL.
+            var character = line.substr(cursorPosition.column - 1, 1).toLowerCase()
+
+            if (character === '>' || character === '' || character === ' ') {
+                editor.insert('<a href="' + asset.resource + '" title="' + asset.alternateText + '" class="" />\n');
+                return;
+            }
+
+            editor.insert(asset.resource);        
+        }
+
+        /**
+         * Inserts an image at the current cursor position.
+         */
+        var insertImage = function (image) {
+            var cursorPosition = editor.selection.getRange().start,
+                line = editor.session.getLine(cursorPosition.row);
+
+            // inserting media URL between two quotes
+            if (line.substr(cursorPosition.column - 5, 5).toLowerCase() === 'src="') {
+                editor.insert(image.resource);
+                return;
+            }
+
+            // inserting media URL with quotes
+            if (line.substr(cursorPosition.column - 4, 4).toLowerCase() === 'src=') {
+                editor.insert('"' + image.resource + '"');
+                return;
+            }
+
+            // inserting media as an inline style
+            if (line.substr(cursorPosition.column - 4, 4).toLowerCase() === 'url(') {
+                editor.insert(image.resource);
+                return;
+            }
+
+            // ensure that the current cursor position warrants a complete img HTML
+            // tag instead of the URL.
+            var character = line.substr(cursorPosition.column - 1, 1).toLowerCase()
+
+            if (character === '>' || character === '' || character === ' ') {
+                editor.insert('<img src="' + image.resource + '" alt="' + image.alternateText + '" class="" />\n');
+                return;
+            }
+
+            editor.insert(image.resource);
         };
 
         /**
