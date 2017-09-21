@@ -8,4 +8,10 @@
         @Html.TextBoxFor(m => m.ContainerCss, new { @class = "text large" })
         <span class="hint">@T("Custom CSS applied to container of simple editor. Use spaces to separate multiple CSS classes.")</span>
     </div>
+
+    <div>
+        <label for="@Html.FieldIdFor(m => m.PatternLibraryUrl)">@T("Pattern Library URL")</label>
+        @Html.TextBoxFor(m => m.PatternLibraryUrl, new { @class = "text large" })
+        <span class="hint">@T("URL to pattern library, which will be accessible on each editor instance. Leave blank to show no link.")</span>
+    </div>
 </fieldset>

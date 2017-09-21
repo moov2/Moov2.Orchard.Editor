@@ -12,5 +12,11 @@ namespace Moov2.Orchard.Editor.Models
             get { return this.As<InfosetPart>().Get<EditorSettingsPart>("ContainerCss"); }
             set { this.As<InfosetPart>().Set<EditorSettingsPart>("ContainerCss", value.ToString()); }
         }
+
+        public string PatternLibraryUrl
+        {
+            get { return this.As<InfosetPart>().Get<EditorSettingsPart>("PatternLibraryUrl"); }
+            set { this.As<InfosetPart>().Set<EditorSettingsPart>("PatternLibraryUrl", value.ToString()); }
+        }
     }
 }
