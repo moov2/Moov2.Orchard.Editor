@@ -1,110 +1,49 @@
 ﻿.editor {
+    min-height: 250px;
     position: relative;
 }
 
-.editor--ace {
-    min-height: 250px;
-}
-
-    .editor--ace .ace_editor {
-        margin: 0;
-        position: absolute;
-        top: 0;
+    .editor__ace,
+    .editor__medium {
         bottom: 0;
         left: 0;
+        position: absolute;
         right: 0;
+        top: 40px;
+        z-index: 100;
     }
 
-.editor--medium {
-    background-color: white;
+        .editor__ace .ace_editor {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
 
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 100;
-}
-
-    .editor__embed {
-        border: 0;
-        display: block;
-        height: 100%;
-        width: 100%;
+    .editor__medium {
+        background-color: white;
     }
+
+        .editor__embed {
+            border: 0;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
 
 .editor-toolbar {
-    background-color: white;
+    box-sizing: border-box;
     display: block;
-    height: 65px;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 500;
-    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .15);
-}
-
-    .editor-toolbar a,
-    .editor-toolbar button {
-        background-color: transparent;
-        border-bottom: 0;
-        color: inherit;
-        font-weight: normal;
-        outline: 0;
-        text-decoration: underline;
-    }
-
-    .editor-toolbar-content {
-        align-items: center;
-        box-sizing: border-box;
-        display: flex;
-        height: 100%;
-        justify-content: space-between;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 1000px;
-        padding-left: 1em;
-        padding-right: 1em;
-
-        color: #555;
-        font-size: .9em;
-    }
-        .editor-toolbar-state {
-            flex: 1
-        }
-
-        .editor-toolbar-options {
-            flex: 1;
-            margin: 0;
-            padding: 0;
-
-            text-align: right;
-
-            list-style: none;
-        }
-
-            .editor-toolbar-options > li {
-                display: inline-block;
-                margin-right: 1em;
-            }
-
-            .editor-toolbar-options > li:last-child {
-                margin-right: 0;
-            }
-
-            .editor-toolbar-options button:hover {
-                text-decoration: none;
-            }
-
-.editor-toolbar-ace {
-    display: block;
+    height: 40px;
     padding: .75em 1.5em;
+
     background-color: #2f3129;
     color: #aec3ce;
 }
 
-    .editor-toolbar-ace ul {
+    .editor-toolbar ul {
         align-items: flex-start;
         display: flex;
         flex-wrap: wrap;
@@ -113,10 +52,10 @@
         padding: 0;
     }
 
-    .editor-toolbar-ace button,
-    .editor-toolbar-ace a,
-    .editor-toolbar-ace a:link,
-    .editor-toolbar-ace a:visited {
+    .editor-toolbar button,
+    .editor-toolbar a,
+    .editor-toolbar a:link,
+    .editor-toolbar a:visited {
         background: transparent;
         border: 0;
         box-shadow: none;
@@ -127,50 +66,50 @@
         padding: 0;
     }
 
-        .editor-toolbar-ace a:active,
-        .editor-toolbar-ace a:focus,
-        .editor-toolbar-ace a:hover,
-        .editor-toolbar-ace button:active,
-        .editor-toolbar-ace button:focus,
-        .editor-toolbar-ace button:hover {
+        .editor-toolbar a:active,
+        .editor-toolbar a:focus,
+        .editor-toolbar a:hover,
+        .editor-toolbar button:active,
+        .editor-toolbar button:focus,
+        .editor-toolbar button:hover {
             background: transparent;
             border: 0;
             box-shadow: none;
             color: #fff;
         }
 
-        .editor-toolbar-ace a:active svg,
-        .editor-toolbar-ace a:focus svg,
-        .editor-toolbar-ace a:hover svg,
-        .editor-toolbar-ace button:active svg,
-        .editor-toolbar-ace button:focus svg,
-        .editor-toolbar-ace button:hover svg {
+        .editor-toolbar a:active svg,
+        .editor-toolbar a:focus svg,
+        .editor-toolbar a:hover svg,
+        .editor-toolbar button:active svg,
+        .editor-toolbar button:focus svg,
+        .editor-toolbar button:hover svg {
             fill: #fff;
         } 
 
-        .editor-toolbar-ace ul > li {
+        .editor-toolbar ul > li {
             flex: 0 1 auto;
             margin-right: 1.5em;
         }
 
-        .editor-toolbar-ace ul > li.align-right {
+        .editor-toolbar ul > li.align-right {
             margin-left: auto;
             margin-right: 0;
         }
 
-            .editor-toolbar-ace svg {
+            .editor-toolbar svg {
                 fill: #aec3ce;
                 margin-right: 4px;
                 vertical-align: middle;
             }
 
-            .editor-toolbar-ace ul > li.icon-reverse svg {
+            .editor-toolbar ul > li.icon-reverse svg {
                 margin-left: 4px;
                 margin-right: 0;
             }
 
-            .editor-toolbar-ace li svg,
-            .editor-toolbar-ace li span {
+            .editor-toolbar li svg,
+            .editor-toolbar li span {
                 display: inline-block;
                 vertical-align: middle;
             }
@@ -180,7 +119,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 6.5em;
+    padding-top: 3em;
     width: 100%;
 }
     

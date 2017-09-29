@@ -14,8 +14,8 @@
     var editorId = Guid.NewGuid();
 }
 
-<div class="js-editor">
-    <div class="editor-toolbar-ace">
+<div class="editor js-editor">
+    <div class="editor-toolbar">
         <ul>
             <li>
                 <button type="button" class="js-toolbar-btn" data-action="open-visual-editor">
@@ -51,7 +51,7 @@
         </ul>
     </div>
 
-    <div class="editor editor--ace">
+    <div class="editor__ace js-editor-ace">
         @Html.TextArea("Text", (string)Model.Text, 25, 80,
          new Dictionary<string, object> {
             {"id", string.Format("editor-{0}", editorId)},
@@ -59,7 +59,7 @@
          })
     </div>
 
-    <div class="editor editor--medium js-editor-medium" style="display: none;">
+    <div class="editor__medium js-editor-medium" style="display: none;">
         <iframe src="/Admin/Editor" class="editor__embed js-editor-medium-iframe" frameborder="0"></iframe>
     </div>
 

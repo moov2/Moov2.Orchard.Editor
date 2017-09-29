@@ -46,7 +46,7 @@
          * Returns textarea that needs to get turned into Ace editor.
          */
         var getTextArea = function () {
-            return $el.querySelector('.editor--ace > textarea');
+            return $el.querySelector('.js-editor-ace > textarea');
         };
 
         /**

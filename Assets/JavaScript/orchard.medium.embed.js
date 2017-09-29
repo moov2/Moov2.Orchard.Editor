@@ -3,7 +3,7 @@
         UPLOAD_MEDIA_URL = '/Admin/Editor/Media';
 
     var editorInstance,
-        $element, $closeBtn, $state, $contentCss;
+        $element, $contentCss;
 
     /**
      * Hides thed editor.
@@ -20,18 +20,7 @@
      */
     var cacheDom = function () {
         $element = document.querySelector('.js-editor-medium-element');
-        $closeBtn = document.querySelector('.js-close-btn');
-        $state = document.querySelector('.js-state');
         $contentCss = document.querySelector('.js-editor-custom-css');
-    };
-
-    /**
-     * Checks if the user has keyed `ESC` to trigger the editor closing.
-     */
-    var checkKeyPressForHide = function (e) {
-        if (e.keyCode === KEY_ESC) {
-            close();
-        }
     };
 
     /**
@@ -40,8 +29,6 @@
     var destroy = function () {
         editorInstance.destroy();
         editorInstance = undefined;
-
-        window.removeEventListener('keydown', checkKeyPressForHide);
     };
 
     /**
@@ -55,10 +42,6 @@
      * Initialises Medium editor.
      */
     var initialise = function (data) {
-        window.addEventListener('keydown', checkKeyPressForHide);
-        $closeBtn.addEventListener('click', close)
-
-        $state.innerHTML = data.state;
         $element.value = data.value;
         editorInstance = new MediumEditor($element);
 
