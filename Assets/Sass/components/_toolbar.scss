@@ -29,6 +29,11 @@
         .editor-toolbar ul > li {
             flex: 0 1 auto;
             margin-right: 1.5em;
+
+            .is-visual-editor &.when-visual-editor { display: block; }
+            .is-visual-editor &.when-code-editor { display: none; }
+            .is-code-editor &.when-code-editor { display: block; }
+            .is-code-editor &.when-visual-editor { display: none; }
         }
 
         .editor-toolbar ul > li.align-right {

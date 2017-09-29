@@ -14,17 +14,21 @@
     position: relative;
 }
 
-    .editor__ace,
-    .editor__medium {
+    .editor__code,
+    .editor__visual {
         bottom: 0;
         left: 0;
         position: absolute;
         right: 0;
         top: 40px;
-        z-index: 100;
     }
 
-        .editor__ace .ace_editor {
+    .editor__code {
+        display: block;
+        z-index: 80;
+    }
+
+        .editor__code .ace_editor {
             margin: 0;
             position: absolute;
             top: 0;
@@ -33,11 +37,18 @@
             right: 0;
         }
 
-    .editor__medium {
+    .editor__visual {
         background-color: white;
+
+        display: none;
+        z-index: 100;
+
+        .is-visual-editor & {
+            display: block;
+        }
     }
 
-        .editor__medium-embed {
+        .editor__visual-embed {
             border: 0;
             display: block;
             height: 100%;

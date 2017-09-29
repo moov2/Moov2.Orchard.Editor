@@ -2,18 +2,9 @@
     var KEY_ESC = 27,
         UPLOAD_MEDIA_URL = '/Admin/Editor/Media';
 
-    var editorInstance,
+    var hasInit = false,
+        editorInstance,
         $element, $contentCss;
-
-    /**
-     * Hides thed editor.
-     */
-    var close = function () {
-        sendMessage({
-            action: 'close',
-            value: getValue()
-        });
-    };
 
     /**
      * Store DOM elements in variables.
@@ -21,14 +12,6 @@
     var cacheDom = function () {
         $element = document.querySelector('.js-editor-medium-element');
         $contentCss = document.querySelector('.js-editor-custom-css');
-    };
-
-    /**
-     * Destroys the instance of medium editor.
-     */
-    var destroy = function () {
-        editorInstance.destroy();
-        editorInstance = undefined;
     };
 
     /**
@@ -45,7 +28,7 @@
         $element.value = data.value;
         editorInstance = new MediumEditor($element);
 
-        editorInstance.subscribe('editableInput', update);
+        editorInstance.subscribe('editableInput', sendUpdate);
 
         if ($contentCss.value !== '') {
             editorInstance.elements[0].className += ' ' + $contentCss.value;
@@ -59,6 +42,8 @@
                 orchardMedia: true
             }
         });
+
+        hasInit = true;
     };
 
     /**
@@ -67,13 +52,21 @@
     var onMessage = function (e) {
         var data = JSON.parse(e.data);
 
-        if (data.action === 'initialise') {
+        if (data.action === 'update') {
+            receivedUpdate(data);
+        }
+    };
+
+    /**
+     * Receives a message from parent window to update value.
+     */
+    var receivedUpdate = function (data) {
+        if (!hasInit) {
             initialise(data);
+            return;
         }
 
-        if (data.action === 'destroy') {
-            destroy();
-        }
+        editorInstance.setContent(data.value);
     };
 
     /**
@@ -86,7 +79,7 @@
     /**
      * Sends message to parent window to update value.
      */
-    var update = function () {
+    var sendUpdate = function () {
         sendMessage({
             action: 'update',
             value: getValue()

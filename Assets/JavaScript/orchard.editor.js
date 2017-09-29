@@ -1,6 +1,9 @@
 ﻿(function () {
+    var CSS_CODE_EDITOR = 'is-code-editor',
+        CSS_VISUAL_EDITOR = 'is-visual-editor';
+
     var editorInstance = function ($el) {
-        var $editor, $html, $iframe, $input;
+        var $visualEditor, $iframe, $input;
 
         /**
          * Returns the type of content
@@ -10,71 +13,41 @@
         };
 
         /**
-         * Gets the `state`, which is a text representation of what the
-         * user is editing.
-         */
-        var getState = function () {
-            var $title = document.querySelector('#Title_Title'),
-                $url = document.querySelector('#AutoroutePart_CurrentUrl'),
-                contentType = getContentType(),
-                state = '';
-
-            if ($title) {
-                state += ($url && $url.value) ? '<a href="/' + $url.value + '" target="_blank" title="View current page">' + $title.value + '</a>' : $title.value;
-            } else {
-                return 'HTML Element within Layout'
-            }
-
-            if (contentType && contentType !== 'LayoutElement') {
-                state += ' (' + contentType + ')';
-            }
-
-            return state || 'Unknown';
-        }
-
-        /**
          * User has clicked an action within the toolbar.
          */
         var handleAction = function (e) {
             var action = e.currentTarget.getAttribute('data-action');
 
             switch (action) {
-                case 'open-visual-editor':
-                    openVisualEditor();
-                    break;
                 case 'insert-media':
                     openMediaPicker();
+                    break;
+                case 'toggle-code-editor':
+                    toggleCodeEditor();
+                    break;
+                case 'toggle-visual-editor':
+                    toggleVisualEditor();
                     break;
             }
         }
 
         /**
-         * Launches the medium editor.
-         */
-        var hide = function () {
-            sendMessage({ action: 'destroy' });
-
-            window.removeEventListener('message', onMessage);
-
-            $html.style.overflow = '';
-
-            $editor.style.display = 'none';
-        };
-
-        /**
          * Initialises Medium editor.
          */
         var init = function () {
-            $editor = $el.querySelector('.js-editor-medium');
+            $visualEditor = $el.querySelector('.js-editor-visual');
             $input = $el.querySelector('.editor-input');
-            $iframe = $el.querySelector('.js-editor-medium-iframe');
-            $html = document.querySelector('html');
+            $iframe = $el.querySelector('.js-editor-visual-iframe');
 
             var $actions = $el.querySelectorAll('.js-toolbar-btn');
 
             for (var i = 0; i < $actions.length; i++) {
                 $actions[i].addEventListener('click', handleAction);
             }
+
+            window.addEventListener('message', onMessage);
+
+            toggleCodeEditor();
         };
 
         /**
@@ -84,10 +57,6 @@
             if (e.data.action === 'update') {
                 $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 $el.dispatchEvent(new Event('editor:valueUpdate'));
-            }
-
-            if (e.data.action === 'close') {
-                hide();
             }
         };
 
@@ -132,23 +101,30 @@
                 }
             });
         };
+    
+        /**
+         * Displays code editor.
+         */
+        var toggleCodeEditor = function () {
+            $el.classList.remove(CSS_VISUAL_EDITOR);
+            $el.classList.add(CSS_CODE_EDITOR);
+
+            $el.dispatchEvent(new Event('editor:valueUpdate'));
+        };
 
         /**
-         * Launches the medium editor.
+         * Displays visual editor.
          */
-        var openVisualEditor = function () {
+        var toggleVisualEditor = function () {
             // send information to iframe.
             sendMessage({
-                action: 'initialise',
+                action: 'update',
                 value: $input.value,
-                mediaPath: getContentType(),
-                state: getState()
+                mediaPath: getContentType()
             });
 
-            window.addEventListener('message', onMessage);
-
-            $html.style.overflow = 'hidden';
-            $editor.style.display = '';
+            $el.classList.remove(CSS_CODE_EDITOR);
+            $el.classList.add(CSS_VISUAL_EDITOR);
         };
 
         /**
@@ -160,7 +136,6 @@
 
         init()
     }
-
 
     /**
      * Initialises instances of the Ace editor.
@@ -174,5 +149,4 @@
     };
 
     document.addEventListener('DOMContentLoaded', initialise);
-
 })();
