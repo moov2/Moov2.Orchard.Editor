@@ -1,0 +1,45 @@
+﻿/**
+ * -----------------------------------------------------------------------------
+ * $EDITOR
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * Styling for the main editor container as well as containers for
+ * the different third party editors.
+ */
+
+.editor {
+    min-height: 250px;
+    position: relative;
+}
+
+    .editor__ace,
+    .editor__medium {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        z-index: 100;
+    }
+
+        .editor__ace .ace_editor {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+    .editor__medium {
+        background-color: white;
+    }
+
+        .editor__medium-embed {
+            border: 0;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }

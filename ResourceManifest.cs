@@ -29,7 +29,7 @@ namespace Moov2.Orchard.Editor
 
             manifest.DefineScript("EditorJs").SetUrl("orchard.editor.min.js", "orchard.editor.js").SetDependencies(new string[] { "AceVendorJs", "BeautifyVendorJs" });
             manifest.DefineScript("EditorEmbedJs").SetUrl("orchard.medium.embed.min.js", "orchard.medium.embed.js");
-            manifest.DefineStyle("EditorStyles").SetUrl("Styles.css");
+            manifest.DefineStyle("EditorStyles").SetUrl("Styles.min.css", "Styles.css");
         }
     }
 }

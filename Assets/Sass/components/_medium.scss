@@ -1,0 +1,23 @@
+﻿/**
+ * -----------------------------------------------------------------------------
+ * $MEDIUM
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * Styling for the medium editor.
+ */
+
+.medium-editor {
+    box-sizing: border-box;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 3em;
+    width: 100%;
+}
+
+    /* Selector is enforced on us by medium editor library. */
+    .medium-editor-element {
+        outline: none;
+    }

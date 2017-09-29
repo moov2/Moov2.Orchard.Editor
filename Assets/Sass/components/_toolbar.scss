@@ -1,0 +1,95 @@
+﻿/**
+ * -----------------------------------------------------------------------------
+ * $TOOLBAR
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * Toolbar of options used to interfact with the editor
+ */
+
+.editor-toolbar {
+    box-sizing: border-box;
+    display: block;
+    height: $toolbar-height;
+    padding: .75em 1.5em;
+    background-color: $toolbar-background-color;
+    color: $toolbar-color;
+}
+
+    .editor-toolbar ul {
+        align-items: flex-start;
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .editor-toolbar ul > li {
+            flex: 0 1 auto;
+            margin-right: 1.5em;
+        }
+
+        .editor-toolbar ul > li.align-right {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+            .editor-toolbar {
+                button,
+                a,
+                a:link,
+                a:visited {
+                    background: transparent;
+                    border: 0;
+                    box-shadow: none;
+                    color: $toolbar-color;
+                    display: block;
+                    font: inherit;
+                    line-height: 18px;
+                    padding: 0;
+                }
+            }
+
+            .editor-toolbar {
+                a:active,
+                a:focus,
+                a:hover,
+                button:active,
+                button:focus,
+                button:hover {
+                    background: transparent;
+                    border: 0;
+                    box-shadow: none;
+                    color: $toolbar-active-color;
+                }
+            }
+
+            .editor-toolbar { 
+                a:active svg,
+                a:focus svg,
+                a:hover svg,
+                button:active svg,
+                button:focus svg,
+                button:hover svg {
+                    fill: $toolbar-active-color;
+                }
+            }
+
+            .editor-toolbar svg {
+                fill: $toolbar-color;
+                margin-right: 4px;
+                vertical-align: middle;
+            }
+
+            .editor-toolbar ul > li.icon-reverse svg {
+                margin-left: 4px;
+                margin-right: 0;
+            }
+
+            .editor-toolbar li svg,
+            .editor-toolbar li span {
+                display: inline-block;
+                vertical-align: middle;
+            }

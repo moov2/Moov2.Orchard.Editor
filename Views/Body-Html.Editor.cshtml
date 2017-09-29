@@ -60,7 +60,7 @@
     </div>
 
     <div class="editor__medium js-editor-medium" style="display: none;">
-        <iframe src="/Admin/Editor" class="editor__embed js-editor-medium-iframe" frameborder="0"></iframe>
+        <iframe src="/Admin/Editor" class="editor__medium-embed js-editor-medium-iframe" frameborder="0"></iframe>
     </div>
 
     @Html.Hidden("ContentType", Model.ContentItem != null ? (string)Model.ContentItem.ContentType : "LayoutElement", new { @class = "js-editor-content-type" })

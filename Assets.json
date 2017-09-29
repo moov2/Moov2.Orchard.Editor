@@ -17,5 +17,11 @@
       "Assets/JavaScript/medium/plugins/medium-editor-insert-media-plugin.js"
     ],
     "output": "Scripts/medium/plugins/medium-editor-insert-media-plugin.js"
+  },
+  {
+    "inputs": [
+      "Assets/Sass/Styles.scss"
+    ],
+    "output": "Styles/Styles.css"
   }
 ]

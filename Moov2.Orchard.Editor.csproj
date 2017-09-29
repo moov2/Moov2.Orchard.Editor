@@ -152,6 +152,7 @@
     <Content Include="Styles\medium\themes\tim.css" />
     <Content Include="Styles\medium\themes\tim.min.css" />
     <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Module.txt" />
@@ -193,6 +194,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Sass\Styles.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Sass\components\_editor.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Sass\components\_toolbar.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Sass\_vars.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Sass\components\_medium.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
