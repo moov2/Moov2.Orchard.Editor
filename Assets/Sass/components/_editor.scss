@@ -38,10 +38,11 @@
         }
 
     .editor__visual {
-        background-color: white;
-
         display: none;
         z-index: 100;
+
+        background-color: white;
+        border: 1px solid $editor-border-color;
 
         .is-visual-editor & {
             display: block;
