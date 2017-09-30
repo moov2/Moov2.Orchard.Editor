@@ -1,0 +1,43 @@
+﻿/**
+ * -----------------------------------------------------------------------------
+ * $EDITOR
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * Styling for the resizer.
+ */
+
+.resizer {
+    bottom: 0;
+    height: $resizer-height;
+    left: 0;
+    position: absolute;
+    width: 100%;
+
+    text-align: center;
+}
+
+    .resizer__btn,
+    .resizer__btn:active {
+        box-sizing: border-box;
+        display: inline-block;
+        padding: .25em .75em;
+
+        background: $resizer-background-color;
+        border: 0;
+        color: $resizer-color;
+        text-shadow: none;
+    }
+
+    .resizer__btn:focus,
+    .resizer__btn:hover {
+        background: $resizer-background-color;
+        color: $resizer-color;
+    }
+
+        .resizer__btn-icon,
+        .resizer__btn-label {
+            display: inline-block;
+            vertical-align: middle;
+        }

@@ -3,7 +3,7 @@
         CSS_VISUAL_EDITOR = 'is-visual-editor';
 
     var editorInstance = function ($el) {
-        var $visualEditor, $iframe, $input;
+        var $visualEditor, $visualEditorIFrame, $input, $resizer;
 
         /**
          * Returns the type of content
@@ -37,7 +37,8 @@
         var init = function () {
             $visualEditor = $el.querySelector('.js-editor-visual');
             $input = $el.querySelector('.editor-input');
-            $iframe = $el.querySelector('.js-editor-visual-iframe');
+            $visualEditorIFrame = $el.querySelector('.js-editor-visual-iframe');
+            $resizer = $el.querySelector('.js-editor-resizer');
 
             var $actions = $el.querySelectorAll('.js-toolbar-btn');
 
@@ -48,6 +49,7 @@
             window.addEventListener('message', onMessage);
 
             toggleCodeEditor();
+            setupResizer();
         };
 
         /**
@@ -101,7 +103,42 @@
                 }
             });
         };
-    
+
+        var setupResizer = function () {
+            var initialY, initialHeight;
+
+            var dispose = function () {
+                window.removeEventListener('mousemove', onDrag);
+                window.removeEventListener('mouseup', dispose);
+                $visualEditorIFrame.contentWindow.removeEventListener('mousemove', onIFrameDrag);
+                $visualEditorIFrame.contentWindow.removeEventListener('mouseup', dispose);
+            };
+
+            var onDrag = function (e) {
+                $el.style.height = (initialHeight + (e.clientY - initialY)) + 'px';
+            };
+
+            var onIFrameDrag = function (e) {
+                var boundingClientRect = $visualEditorIFrame.getBoundingClientRect(),
+                    evt = new CustomEvent('mousemove', { bubbles: true, cancelable: false });
+
+                evt.clientX = e.clientX + boundingClientRect.left;
+                evt.clientY = e.clientY + boundingClientRect.top;
+
+                $visualEditorIFrame.dispatchEvent(evt);
+            };
+
+            $resizer.addEventListener('mousedown', function (e) {
+                initialY = e.clientY;
+                initialHeight = $el.offsetHeight;
+
+                window.addEventListener('mousemove', onDrag);
+                window.addEventListener('mouseup', dispose);
+                $visualEditorIFrame.contentWindow.addEventListener('mousemove', onIFrameDrag);
+                $visualEditorIFrame.contentWindow.addEventListener('mouseup', dispose);
+            })
+        };
+
         /**
          * Displays code editor.
          */
@@ -131,7 +168,7 @@
          * Sends a message to the iframe.
          */
         var sendMessage = function (msg) {
-            $iframe.contentWindow.postMessage(JSON.stringify(msg), '*');
+            $visualEditorIFrame.contentWindow.postMessage(JSON.stringify(msg), '*');
         };
 
         init()

@@ -10,17 +10,17 @@
  */
 
 .editor {
-    min-height: 250px;
+    min-height: $editor-min-height;
     position: relative;
 }
 
     .editor__code,
     .editor__visual {
-        bottom: 0;
+        bottom: $resizer-height;
         left: 0;
         position: absolute;
         right: 0;
-        top: 40px;
+        top: $toolbar-height;
     }
 
     .editor__code {
