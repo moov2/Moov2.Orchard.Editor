@@ -196,9 +196,6 @@
     <Content Include="Content\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Sass\Styles.scss" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Assets\Sass\components\_editor.scss" />
   </ItemGroup>
   <ItemGroup>

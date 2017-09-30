@@ -20,7 +20,11 @@
   },
   {
     "inputs": [
-      "Assets/Sass/Styles.scss"
+      "Assets/Sass/_vars.scss",
+      "Assets/Sass/components/_editor.scss",
+      "Assets/Sass/components/_medium.scss",
+      "Assets/Sass/components/_resizer.scss",
+      "Assets/Sass/components/_toolbar.scss"
     ],
     "output": "Styles/Styles.css"
   }
