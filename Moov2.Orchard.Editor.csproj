@@ -105,6 +105,7 @@
     <Content Include="Assets\JavaScript\orchard.medium.embed.js" />
     <Content Include="Assets\JavaScript\orchard.editor.js" />
     <Content Include="Content\icon-face.svg" />
+    <Content Include="Content\icon-fullscreen.svg" />
     <Content Include="Content\icon-insert-photo.svg" />
     <Content Include="Content\icon-open-in-new.svg" />
     <Content Include="Scripts\ace\ace.js" />

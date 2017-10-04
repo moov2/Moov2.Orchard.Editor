@@ -16,6 +16,10 @@
     width: 100%;
 
     text-align: center;
+
+    .is-fullscreen & {
+        display: none;
+    }
 }
 
     .resizer__btn,

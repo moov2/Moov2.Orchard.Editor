@@ -12,6 +12,18 @@
 .editor {
     min-height: $editor-min-height;
     position: relative;
+
+    /**
+     * 1. Editor uses inline styles to set the height when user resizes the editor.
+     */
+    &.is-fullscreen {
+        left: 0;
+        height: 100%!important; /* 1. */
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 50;
+    }
 }
 
     .editor__code,
@@ -21,6 +33,10 @@
         position: absolute;
         right: 0;
         top: $toolbar-height;
+
+        .is-fullscreen & {
+            bottom: 0;
+        }
     }
 
     .editor__code {
