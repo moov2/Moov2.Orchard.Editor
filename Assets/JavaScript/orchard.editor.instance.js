@@ -5,6 +5,8 @@
             id: $el.getAttribute('data-id')
         };
 
+        console.log(state);
+
         /**
          * User has clicked an action within the toolbar.
          */
@@ -47,12 +49,12 @@
          * Received a message from the iframe editor.
          */
         var onMessage = function (e) {
-            if (e.data.id !== instanceId) {
+            if (e.data.id !== state.id) {
                 return;
             }
 
             if (e.data.action === 'update') {
-                $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
+                state.$input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 $el.dispatchEvent(new Event('editor:valueUpdate'));
             }
         };

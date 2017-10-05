@@ -8,7 +8,7 @@ window.Editor.plugins.push({
     exec: function (instance) {
         var initialY, initialHeight,
             $resizer = instance.$el.querySelector('.js-editor-resizer'),
-            $visualIFrame = instance.$el.querySelector('.js-editor-visual');
+            $visualIFrame = instance.$el.querySelector('.js-editor-visual-iframe');
         
         var dispose = function () {
             window.removeEventListener('mousemove', onDrag);

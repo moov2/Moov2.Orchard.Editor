@@ -8,7 +8,7 @@ window.Editor.plugins.push({
     exec: function (instance) {
         var CSS_CODE_EDITOR = 'is-code-editor',
             CSS_VISUAL_EDITOR = 'is-visual-editor',
-            $visualIFrame = instance.$el.querySelector('.js-editor-visual');
+            $visualIFrame = instance.$el.querySelector('.js-editor-visual-iframe');
 
         /**
          * Returns the type of content
@@ -18,7 +18,6 @@ window.Editor.plugins.push({
         };
 
         var sendMessage = function (msg) {
-            msg.instanceId = instanceId;
             $visualIFrame.contentWindow.postMessage(JSON.stringify(msg), '*');
         };
 

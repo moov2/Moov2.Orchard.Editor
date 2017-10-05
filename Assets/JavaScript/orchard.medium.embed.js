@@ -52,7 +52,7 @@
     var onMessage = function (e) {
         var data = JSON.parse(e.data);
 
-        instanceId = data.instanceId;
+        instanceId = data.id;
 
         if (data.action === 'update') {
             receivedUpdate(data);
