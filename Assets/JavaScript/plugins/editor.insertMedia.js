@@ -1,3 +1,7 @@
+/**
+ * Inserts media into the editor from the Orchard media library.
+ */
+
 window.Editor.plugins.push({
     action: 'insert-media',
     init: false,

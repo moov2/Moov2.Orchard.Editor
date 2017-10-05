@@ -1,8 +1,6 @@
 ﻿(function () {
     var CSS_CODE_EDITOR = 'is-code-editor',
-        CSS_VISUAL_EDITOR = 'is-visual-editor',
-        CSS_FULLSCREEN = 'is-fullscreen',
-        KEY_ESC = 27;
+        CSS_VISUAL_EDITOR = 'is-visual-editor';
 
     var editorInstance = function ($el) {
         var instanceId = $el.getAttribute('data-id'),
@@ -46,9 +44,6 @@
                     break;
                 case 'toggle-visual-editor':
                     toggleVisualEditor();
-                    break;
-                case 'toggle-fullscreen':
-                    toggleFullscreen();
                     break;
             }
         }
@@ -131,28 +126,6 @@
             $el.classList.add(CSS_CODE_EDITOR);
 
             $el.dispatchEvent(new Event('editor:valueUpdate'));
-        };
-
-        /**
-         * Toggles fullscreen state.
-         */
-        var toggleFullscreen = function (e) {
-            if (e && e.keyCode !== KEY_ESC) {
-                return;
-            }
-
-            if ($el.classList.contains(CSS_FULLSCREEN)) {
-                $el.classList.remove(CSS_FULLSCREEN);
-
-                document.querySelector('html').style.overflow = '';
-                window.removeEventListener('keydown', toggleFullscreen);
-                return;
-            }
-
-            $el.classList.add(CSS_FULLSCREEN);
-            document.querySelector('html').style.overflow = 'hidden';
-
-            window.addEventListener('keydown', toggleFullscreen);
         };
 
         /**

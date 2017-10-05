@@ -2,6 +2,7 @@
   {
     "inputs": [
       "Assets/JavaScript/orchard.editor.js",
+      "Assets/JavaScript/plugins/editor.fullscreen.js",
       "Assets/JavaScript/plugins/editor.insertMedia.js",
       "Assets/JavaScript/orchard.ace.js",
       "Assets/JavaScript/orchard.editor.instance.js"

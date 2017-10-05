@@ -12,6 +12,7 @@
 .editor {
     min-height: $editor-min-height;
     position: relative;
+    z-index: 10;
 
     /**
      * 1. Editor uses inline styles to set the height when user resizes the editor.
