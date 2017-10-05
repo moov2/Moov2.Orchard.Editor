@@ -30,7 +30,7 @@ window.Editor.plugins.push({
                 $('html, body').css('overflow', '');
                 $('html').scrollTop(cachedScrollPosition);
 
-                if (selectedData.length === 0) {
+                if(!selectedData || selectedData.length === 0) {
                     return;
                 }
                 
