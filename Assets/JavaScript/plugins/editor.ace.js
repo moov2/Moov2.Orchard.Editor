@@ -15,13 +15,15 @@ window.Editor.plugins.push({
             var alt, cursorPosition, line, url;
 
             for (var i = 0; i < e.detail.mediaItems.length; i++) {
-                switch (e.detail.mediaItems[i].contentType.toLowerCase()) {
-                    case 'document':
-                        insertDocument(e.detail.mediaItems[i]);
-                        break;
-                    case 'image':
-                        insertImage(e.detail.mediaItems[i]);
-                        break;
+
+                if (e.detail.mediaItems[i].contentType.toLowerCase() === 'document') {
+                    insertDocument(e.detail.mediaItems[i]);
+                    continue;
+                }
+
+                if (e.detail.mediaItems[i].contentType.toLowerCase() === 'image' || e.detail.mediaItems[i].contentType.toLowerCase() === 'vectorimage') {
+                    insertImage(e.detail.mediaItems[i]);
+                    continue;
                 }
             }
         };
