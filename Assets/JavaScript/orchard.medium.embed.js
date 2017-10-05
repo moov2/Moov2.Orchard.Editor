@@ -25,6 +25,7 @@
      * Initialises Medium editor.
      */
     var initialise = function (data) {
+        data.value = addExtraParagraph(data.value);
         $element.value = data.value;
         editorInstance = new MediumEditor($element);
 
@@ -69,6 +70,8 @@
             return;
         }
 
+        data.value = addExtraParagraph(data.value);
+
         editorInstance.setContent(data.value);
         setFocus();
     };
@@ -101,6 +104,17 @@
 
         editorInstance.selectElement(editorInstance.elements[0]);
         MediumEditor.selection.moveCursor(document, editorInstance.elements[0], 0);
+    };
+
+    /**
+     * Add extra paragraph if needed
+     */
+    var addExtraParagraph = function (value) {
+        if(value.length > 0 && !value.endsWith('</p>')) {
+            value = value + '<p><br /></p>';
+        }
+
+        return value;
     };
     
     document.addEventListener('DOMContentLoaded', cacheDom);
