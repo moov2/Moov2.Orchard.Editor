@@ -5,17 +5,8 @@
         KEY_ESC = 27;
 
     var editorInstance = function ($el) {
-        var instanceId, $visualEditor, $visualEditorIFrame, $input, $resizer;
-
-        /**
-         * Generates unique ID for instance
-         */
-        var setId = function () {
-            instanceId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-                 return v.toString(16);
-            });
-        };
+        var instanceId = $el.getAttribute('data-id'),
+            $visualEditor, $visualEditorIFrame, $input, $resizer;
         
         /**
          * Returns the type of content
@@ -76,7 +67,7 @@
             if (e.data.id !== instanceId) {
                 return;
             }
-            
+
             if (e.data.action === 'update') {
                 $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 $el.dispatchEvent(new Event('editor:valueUpdate'));
