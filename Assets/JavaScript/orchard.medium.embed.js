@@ -65,10 +65,12 @@
     var receivedUpdate = function (data) {
         if (!hasInit) {
             initialise(data);
+            setFocus();
             return;
         }
 
         editorInstance.setContent(data.value);
+        setFocus();
     };
 
     /**
@@ -87,6 +89,18 @@
             id: instanceId,
             value: getValue()
         });
+    };
+
+    /**
+     * Set focus on medium editor
+     */
+    var setFocus = function () {
+        if(!editorInstance) {
+            return;
+        }
+
+        editorInstance.selectElement(editorInstance.elements[0]);
+        MediumEditor.selection.moveCursor(document, editorInstance.elements[0], 0);
     };
     
     document.addEventListener('DOMContentLoaded', cacheDom);

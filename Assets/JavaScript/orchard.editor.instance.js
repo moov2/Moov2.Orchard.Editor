@@ -5,8 +5,6 @@
             id: $el.getAttribute('data-id')
         };
 
-        console.log(state);
-
         /**
          * User has clicked an action within the toolbar.
          */
