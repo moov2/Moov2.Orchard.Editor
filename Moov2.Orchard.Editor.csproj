@@ -102,8 +102,13 @@
     <Content Include="Assets.json" />
     <Content Include="Assets\JavaScript\medium\plugins\medium-editor-insert-media-plugin.js" />
     <Content Include="Assets\JavaScript\orchard.ace.js" />
+    <Content Include="Assets\JavaScript\orchard.editor.instance.js" />
     <Content Include="Assets\JavaScript\orchard.medium.embed.js" />
     <Content Include="Assets\JavaScript\orchard.editor.js" />
+    <Content Include="Assets\JavaScript\plugins\editor.context.js" />
+    <Content Include="Assets\JavaScript\plugins\editor.fullscreen.js" />
+    <Content Include="Assets\JavaScript\plugins\editor.insertMedia.js" />
+    <Content Include="Assets\JavaScript\plugins\editor.resizer.js" />
     <Content Include="Content\icon-face.svg" />
     <Content Include="Content\icon-fullscreen.svg" />
     <Content Include="Content\icon-insert-photo.svg" />
