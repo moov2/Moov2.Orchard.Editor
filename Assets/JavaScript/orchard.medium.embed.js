@@ -3,7 +3,7 @@
         UPLOAD_MEDIA_URL = '/Admin/Editor/Media';
 
     var hasInit = false,
-        editorInstance,
+        editorInstance, instanceId,
         $element, $contentCss;
 
     /**
@@ -52,6 +52,8 @@
     var onMessage = function (e) {
         var data = JSON.parse(e.data);
 
+        instanceId = data.instanceId;
+
         if (data.action === 'update') {
             receivedUpdate(data);
         }
@@ -82,6 +84,7 @@
     var sendUpdate = function () {
         sendMessage({
             action: 'update',
+            id: instanceId,
             value: getValue()
         });
     };

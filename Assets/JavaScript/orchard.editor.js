@@ -5,8 +5,18 @@
         KEY_ESC = 27;
 
     var editorInstance = function ($el) {
-        var $visualEditor, $visualEditorIFrame, $input, $resizer;
+        var instanceId, $visualEditor, $visualEditorIFrame, $input, $resizer;
 
+        /**
+         * Generates unique ID for instance
+         */
+        var setId = function () {
+            instanceId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                 return v.toString(16);
+            });
+        };
+        
         /**
          * Returns the type of content
          */
@@ -40,6 +50,8 @@
          * Initialises Medium editor.
          */
         var init = function () {
+            setId();
+
             $visualEditor = $el.querySelector('.js-editor-visual');
             $input = $el.querySelector('.editor-input');
             $visualEditorIFrame = $el.querySelector('.js-editor-visual-iframe');
@@ -61,6 +73,10 @@
          * Received a message from the iframe editor.
          */
         var onMessage = function (e) {
+            if (e.data.id !== instanceId) {
+                return;
+            }
+            
             if (e.data.action === 'update') {
                 $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 $el.dispatchEvent(new Event('editor:valueUpdate'));
@@ -195,10 +211,11 @@
          * Sends a message to the iframe.
          */
         var sendMessage = function (msg) {
+            msg.instanceId = instanceId;
             $visualEditorIFrame.contentWindow.postMessage(JSON.stringify(msg), '*');
         };
 
-        init()
+        init();
     }
 
     /**
