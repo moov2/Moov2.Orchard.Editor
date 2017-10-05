@@ -21,3 +21,14 @@
     .medium-editor-element {
         outline: none;
     }
+
+.medium-editor-placeholder:after {
+    width: 100%;
+    max-width: 900px;
+    padding-left: $editor-placeholder-padding;
+    padding-right: $editor-placeholder-padding;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-top: -60px;
+}
