@@ -19,7 +19,8 @@
         var getInstance = function () {
             return {
                 id: instanceId,
-                $el: $el
+                $el: $el,
+                $visualIFrame: $visualEditorIFrame
             };
         }
 
@@ -36,7 +37,6 @@
                     return;
                 }
             }
-
 
             switch (action) {
                 case 'toggle-code-editor':
@@ -55,7 +55,6 @@
             $visualEditor = $el.querySelector('.js-editor-visual');
             $input = $el.querySelector('.editor-input');
             $visualEditorIFrame = $el.querySelector('.js-editor-visual-iframe');
-            $resizer = $el.querySelector('.js-editor-resizer');
 
             var $actions = $el.querySelectorAll('.js-toolbar-btn');
 
@@ -66,7 +65,14 @@
             window.addEventListener('message', onMessage);
 
             toggleCodeEditor();
-            setupResizer();
+
+            // loop over plugins and execute any that are flagged to
+            // exec on initialise.
+            for (var i = 0; i < window.Editor.plugins.length; i++) {
+                if (window.Editor.plugins[i].init) {
+                    window.Editor.plugins[i].exec(getInstance());
+                }
+            }
         };
 
         /**
@@ -81,41 +87,6 @@
                 $input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 $el.dispatchEvent(new Event('editor:valueUpdate'));
             }
-        };
-
-        var setupResizer = function () {
-            var initialY, initialHeight;
-
-            var dispose = function () {
-                window.removeEventListener('mousemove', onDrag);
-                window.removeEventListener('mouseup', dispose);
-                $visualEditorIFrame.contentWindow.removeEventListener('mousemove', onIFrameDrag);
-                $visualEditorIFrame.contentWindow.removeEventListener('mouseup', dispose);
-            };
-
-            var onDrag = function (e) {
-                $el.style.height = (initialHeight + (e.clientY - initialY)) + 'px';
-            };
-
-            var onIFrameDrag = function (e) {
-                var boundingClientRect = $visualEditorIFrame.getBoundingClientRect(),
-                    evt = new CustomEvent('mousemove', { bubbles: true, cancelable: false });
-
-                evt.clientX = e.clientX + boundingClientRect.left;
-                evt.clientY = e.clientY + boundingClientRect.top;
-
-                $visualEditorIFrame.dispatchEvent(evt);
-            };
-
-            $resizer.addEventListener('mousedown', function (e) {
-                initialY = e.clientY;
-                initialHeight = $el.offsetHeight;
-
-                window.addEventListener('mousemove', onDrag);
-                window.addEventListener('mouseup', dispose);
-                $visualEditorIFrame.contentWindow.addEventListener('mousemove', onIFrameDrag);
-                $visualEditorIFrame.contentWindow.addEventListener('mouseup', dispose);
-            })
         };
 
         /**
