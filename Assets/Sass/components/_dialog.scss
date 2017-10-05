@@ -1,0 +1,76 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $DIALOG
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * Styling for dialog containers shown when interacting with editor.
+ */
+
+.editor-dialog {
+    box-sizing: border-box;
+    left: 0;
+    max-width: 450px;
+    padding: 1em;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 110;
+
+    background-color: #fff;
+
+    input {
+        margin-bottom: .3em;
+    }
+
+    button {
+        border: 0;
+        box-shadow: none;
+        display: inline-block;
+
+        background: #0a2fbc;
+        color: white;
+
+        &:active,
+        &:focus,
+        &:hover {
+            background: darken(#0a2fbc, 5%);
+            border: 0;
+        }
+
+        &[disabled] {
+            opacity: .3;
+        }
+    }
+}
+
+    .editor-dialog__example {
+        margin-bottom: .3em;
+
+        &:empty {
+            margin-bottom: 0;
+        }
+        
+        .embed {
+            height: 0;
+            margin-top: 0;
+            max-width: 100%;
+            padding-bottom: 56.25%;
+            position: relative;
+        
+            & iframe,
+            & object,
+            & embed {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%; 
+                height: 100%;
+            }
+        }
+    }
+
+    .editor-dialog__cancel-btn {
+        float: right;
+    }

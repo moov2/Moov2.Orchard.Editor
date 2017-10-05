@@ -13,6 +13,9 @@
     display: block;
     height: $toolbar-height;
     padding: .75em 1.5em;
+    position: relative;
+    z-index: 110;
+
     background-color: $toolbar-background-color;
     color: $toolbar-color;
 }
@@ -42,7 +45,7 @@
         }
 
             .editor-toolbar {
-                button,
+                .editor-toolbar__button,
                 a,
                 a:link,
                 a:visited {
@@ -61,9 +64,9 @@
                 a:active,
                 a:focus,
                 a:hover,
-                button:active,
-                button:focus,
-                button:hover {
+                .editor-toolbar__button:active,
+                .editor-toolbar__button:focus,
+                .editor-toolbar__button:hover {
                     background: transparent;
                     border: 0;
                     box-shadow: none;
@@ -75,9 +78,9 @@
                 a:active svg,
                 a:focus svg,
                 a:hover svg,
-                button:active svg,
-                button:focus svg,
-                button:hover svg {
+                .button:active svg,
+                .editor-toolbar__button:focus svg,
+                .editor-toolbar__button:hover svg {
                     fill: $toolbar-active-color;
                 }
             }

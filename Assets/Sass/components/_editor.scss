@@ -15,6 +15,13 @@
     z-index: 10;
 
     /**
+     * 1. Ensures active dialogs overlap any other instances of the editor.
+     */
+    &.has-active-dialog {
+        z-index: 15; /* 1. */
+    }
+
+    /**
      * 1. Editor uses inline styles to set the height when user resizes the editor.
      */
     &.is-fullscreen {

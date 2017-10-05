@@ -5,6 +5,7 @@
       "Assets/JavaScript/plugins/editor.ace.js",
       "Assets/JavaScript/plugins/editor.context.js",
       "Assets/JavaScript/plugins/editor.fullscreen.js",
+      "Assets/JavaScript/plugins/editor.insertEmbed.js",
       "Assets/JavaScript/plugins/editor.insertMedia.js",
       "Assets/JavaScript/plugins/editor.resizer.js",
       "Assets/JavaScript/orchard.editor.instance.js"

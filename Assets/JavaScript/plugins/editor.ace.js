@@ -12,8 +12,6 @@ window.Editor.plugins.push({
                 return;
             }
 
-            var alt, cursorPosition, line, url;
-
             for (var i = 0; i < e.detail.mediaItems.length; i++) {
 
                 if (e.detail.mediaItems[i].contentType.toLowerCase() === 'document') {
@@ -75,6 +73,7 @@ window.Editor.plugins.push({
             $input.addEventListener('change', updateSession);
             instance.$el.addEventListener('editor:valueUpdate', updateSession);
             instance.$el.addEventListener('editor:addMedia', addMedia);
+            instance.$el.addEventListener('editor:insertHtml', insertHTML);
         };
 
         /**
@@ -143,6 +142,17 @@ window.Editor.plugins.push({
             }
 
             editor.insert(image.resource);
+        };
+
+        /**
+         * Inserts HTML into editor.
+         */
+        var insertHTML = function (e) {
+            if (!e || !e.detail || !e.detail.html) {
+                return;
+            }
+
+            editor.insert(e.detail.html);
         };
 
         /**
