@@ -7,13 +7,14 @@ window.Editor.plugins.push({
     init: true,
     exec: function (instance) {
         var initialY, initialHeight,
-            $resizer = instance.$el.querySelector('.js-editor-resizer');
+            $resizer = instance.$el.querySelector('.js-editor-resizer'),
+            $visualIFrame = instance.$el.querySelector('.js-editor-visual');
         
         var dispose = function () {
             window.removeEventListener('mousemove', onDrag);
             window.removeEventListener('mouseup', dispose);
-            instance.$visualIFrame.contentWindow.removeEventListener('mousemove', onIFrameDrag);
-            instance.$visualIFrame.contentWindow.removeEventListener('mouseup', dispose);
+            $visualIFrame.contentWindow.removeEventListener('mousemove', onIFrameDrag);
+            $visualIFrame.contentWindow.removeEventListener('mouseup', dispose);
         };
 
         var onDrag = function (e) {
@@ -21,13 +22,13 @@ window.Editor.plugins.push({
         };
 
         var onIFrameDrag = function (e) {
-            var boundingClientRect = instance.$visualIFrame.getBoundingClientRect(),
+            var boundingClientRect = $visualIFrame.getBoundingClientRect(),
                 evt = new CustomEvent('mousemove', { bubbles: true, cancelable: false });
 
             evt.clientX = e.clientX + boundingClientRect.left;
             evt.clientY = e.clientY + boundingClientRect.top;
 
-            instance.$visualIFrame.dispatchEvent(evt);
+            $visualIFrame.dispatchEvent(evt);
         };
 
         $resizer.addEventListener('mousedown', function (e) {
@@ -36,8 +37,8 @@ window.Editor.plugins.push({
 
             window.addEventListener('mousemove', onDrag);
             window.addEventListener('mouseup', dispose);
-            instance.$visualIFrame.contentWindow.addEventListener('mousemove', onIFrameDrag);
-            instance.$visualIFrame.contentWindow.addEventListener('mouseup', dispose);
+            $visualIFrame.contentWindow.addEventListener('mousemove', onIFrameDrag);
+            $visualIFrame.contentWindow.addEventListener('mouseup', dispose);
         });
     }
 });

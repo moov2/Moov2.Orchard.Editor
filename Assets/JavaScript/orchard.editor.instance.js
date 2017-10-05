@@ -1,20 +1,9 @@
 ﻿(function () {
     var editorInstance = function ($el) {
-        var instanceId = $el.getAttribute('data-id'),
-            $input;
-    
-
-        /**
-         * Returns object representing instance.
-         */
-        var getInstance = function () {
-            return {
-                id: instanceId,
-                $el: $el,
-                $visualIFrame: $el.querySelector('.js-editor-visual-iframe'),
-                $input: $input
-            };
-        }
+        var state = {
+            $el: $el,
+            id: $el.getAttribute('data-id')
+        };
 
         /**
          * User has clicked an action within the toolbar.
@@ -25,7 +14,7 @@
 
             for (var i = 0; i < plugins.length; i++) {
                 if (plugins[i].action === action) {
-                    plugins[i].exec(getInstance());
+                    plugins[i].exec(state);
                     return;
                 }
             }
@@ -35,7 +24,7 @@
          * Initialises Medium editor.
          */
         var init = function () {
-            $input = $el.querySelector('.editor-input');
+            state.$input = $el.querySelector('.editor-input');
 
             var $actions = $el.querySelectorAll('.js-toolbar-btn');
 
@@ -49,7 +38,7 @@
             // exec on initialise.
             for (var i = 0; i < window.Editor.plugins.length; i++) {
                 if (window.Editor.plugins[i].init) {
-                    window.Editor.plugins[i].exec(getInstance());
+                    window.Editor.plugins[i].exec(state);
                 }
             }
         };

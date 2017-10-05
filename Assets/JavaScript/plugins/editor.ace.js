@@ -1,5 +1,7 @@
-﻿(function () {
-    var editorInstance = function ($el) {
+window.Editor.plugins.push({
+    action: 'ace',
+    init: true,
+    exec: function (instance) {
         var editor, session, $input;
 
         /**
@@ -46,7 +48,7 @@
          * Returns textarea that needs to get turned into Ace editor.
          */
         var getTextArea = function () {
-            return $el.querySelector('.js-editor-code > textarea');
+            return instance.$el.querySelector('.js-editor-code > textarea');
         };
 
         /**
@@ -56,7 +58,7 @@
             editor = ace.edit(getTextArea().id);
             session = editor.getSession();
 
-            $input = $el.querySelector('.editor-input');
+            $input = instance.$el.querySelector('.editor-input');
 
             editor.setTheme('ace/theme/monokai');
             editor.setShowPrintMargin(false);
@@ -69,8 +71,8 @@
             session.on('change', update);
 
             $input.addEventListener('change', updateSession);
-            $el.addEventListener('editor:valueUpdate', updateSession);
-            $el.addEventListener('editor:addMedia', addMedia);
+            instance.$el.addEventListener('editor:valueUpdate', updateSession);
+            instance.$el.addEventListener('editor:addMedia', addMedia);
         };
 
         /**
@@ -154,17 +156,4 @@
 
         init();
     }
-
-    /**
-     * Initialises instances of the Ace editor.
-     */
-    var initialise = function () {
-        var $editors = document.querySelectorAll('.js-editor');
-
-        for (var i = 0; i < $editors.length; i++) {
-            editorInstance($editors[i]);
-        }
-    };
-
-    document.addEventListener('DOMContentLoaded', initialise);
-})();
+});

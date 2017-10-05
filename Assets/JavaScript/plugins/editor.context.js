@@ -7,7 +7,8 @@ window.Editor.plugins.push({
     init: true,
     exec: function (instance) {
         var CSS_CODE_EDITOR = 'is-code-editor',
-            CSS_VISUAL_EDITOR = 'is-visual-editor';
+            CSS_VISUAL_EDITOR = 'is-visual-editor',
+            $visualIFrame = instance.$el.querySelector('.js-editor-visual');
 
         /**
          * Returns the type of content
@@ -18,7 +19,7 @@ window.Editor.plugins.push({
 
         var sendMessage = function (msg) {
             msg.instanceId = instanceId;
-            instance.$visualIFrame.contentWindow.postMessage(JSON.stringify(msg), '*');
+            $visualIFrame.contentWindow.postMessage(JSON.stringify(msg), '*');
         };
 
         var toggleCodeEditor = function () {
@@ -40,7 +41,7 @@ window.Editor.plugins.push({
                 id: instance.id
             };
 
-            instance.$visualIFrame.contentWindow.postMessage(JSON.stringify(message), '*');
+            $visualIFrame.contentWindow.postMessage(JSON.stringify(message), '*');
 
             instance.$el.classList.remove(CSS_CODE_EDITOR);
             instance.$el.classList.add(CSS_VISUAL_EDITOR);
