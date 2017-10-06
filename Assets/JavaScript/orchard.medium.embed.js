@@ -50,6 +50,7 @@
     /**
      * Process message from the parent window.
      */
+    
     var onMessage = function (e) {
         var data = JSON.parse(e.data);
 
