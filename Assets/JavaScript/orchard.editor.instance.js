@@ -58,7 +58,7 @@
         };
 
         init();
-    }
+    };
 
     /**
      * Initialises instances of the Ace editor.
@@ -71,5 +71,11 @@
         }
     };
 
+    if (document.readyState === 'complete') {
+        initialise();
+        return;
+    }
+
     document.addEventListener('DOMContentLoaded', initialise);
+
 })();
