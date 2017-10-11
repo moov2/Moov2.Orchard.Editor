@@ -7,6 +7,17 @@
         $element, $contentCss;
 
     /**
+     * Add extra paragraph if needed
+     */
+    var addExtraParagraph = function (value) {
+        if(!value || !value.endsWith('</p>')) {
+            value = value + '<p><br /></p>';
+        }
+
+        return value;
+    };
+
+    /**
      * Store DOM elements in variables.
      */
     var cacheDom = function () {
@@ -65,16 +76,18 @@
      * Receives a message from parent window to update value.
      */
     var receivedUpdate = function (data) {
+        var isEmpty = data.value === '';
+
         if (!hasInit) {
             initialise(data);
-            setFocus();
-            return;
         }
 
         data.value = addExtraParagraph(data.value);
-
         editorInstance.setContent(data.value);
-        setFocus();
+
+        if (isEmpty) {
+            setFocus();
+        }
     };
 
     /**
@@ -105,17 +118,6 @@
 
         editorInstance.selectElement(editorInstance.elements[0]);
         MediumEditor.selection.moveCursor(document, editorInstance.elements[0], 0);
-    };
-
-    /**
-     * Add extra paragraph if needed
-     */
-    var addExtraParagraph = function (value) {
-        if(value.length > 0 && !value.endsWith('</p>')) {
-            value = value + '<p><br /></p>';
-        }
-
-        return value;
     };
     
     document.addEventListener('DOMContentLoaded', cacheDom);
