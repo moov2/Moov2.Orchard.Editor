@@ -73,7 +73,7 @@
             onClosed: function () {
                 var selectedData = $.colorbox.selectedData;
 
-                if (selectedData.length === 0) {
+                if (!selectedData || selectedData.length === 0) {
                     return;
                 }
 
@@ -151,12 +151,6 @@
             $data.find('figure').removeClass('medium-insert-image');
             $data.find('figcaption').removeAttr('data-placeholder').removeClass('medium-insert-caption-placeholder');
             $data.find('*[class=""]').removeAttr('class');
-
-            $last = $data.children().last();
-            
-            if ($last.is('p') & $last.children().length === 1 && $last.find('br').length === 1) {
-                $last.remove();
-            }
 
             data[key].value = $data.html();
         });

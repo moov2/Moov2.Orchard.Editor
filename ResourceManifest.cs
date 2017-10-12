@@ -4,6 +4,8 @@ namespace Moov2.Orchard.Editor
 {
     public class ResourceManifest : IResourceManifestProvider
     {
+        private const string VERSION = "1";
+
         public void BuildManifests(ResourceManifestBuilder builder)
         {
             var manifest = builder.Add();
@@ -19,17 +21,22 @@ namespace Moov2.Orchard.Editor
             manifest.DefineScript("jQueryFileUpload").SetUrl("blueimp/jquery.fileupload.js");
             manifest.DefineStyle("FontAwesome").SetUrl("font-awesome/font-awesome.css").SetCdn("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
-            manifest.DefineScript("MediumInsertMediaPluginJs").SetUrl("medium/plugins/medium-editor-insert-media-plugin.min.js", "medium/plugins/medium-editor-insert-media-plugin.js");
-            manifest.DefineScript("MediumInsertPluginJs").SetUrl("medium/plugins/medium-editor-insert-plugin.min.js", "medium/plugins/medium-editor-insert-plugin.js").SetDependencies("jQuery", "Handlebars", "jQuerySortable", "jQueryWidget", "jQueryIFrameTransport", "jQueryFileUpload", "MediumInsertMediaPluginJs");
-            manifest.DefineStyle("MediumInsertPluginCss").SetUrl("medium/plugins/medium-editor-insert-plugin.min.css", "medium/plugins/medium-editor-insert-plugin.css").SetDependencies("FontAwesome");
+            manifest.DefineScript("MediumInsertMediaPluginJs").SetUrl(CacheBust("medium/plugins/medium-editor-insert-media-plugin.min.js"), "medium/plugins/medium-editor-insert-media-plugin.js");
+            manifest.DefineScript("MediumInsertPluginJs").SetUrl(CacheBust("medium/plugins/medium-editor-insert-plugin.min.js"), "medium/plugins/medium-editor-insert-plugin.js").SetDependencies("jQuery", "Handlebars", "jQuerySortable", "jQueryWidget", "jQueryIFrameTransport", "jQueryFileUpload", "MediumInsertMediaPluginJs");
+            manifest.DefineStyle("MediumInsertPluginCss").SetUrl(CacheBust("medium/plugins/medium-editor-insert-plugin.min.css"), "medium/plugins/medium-editor-insert-plugin.css").SetDependencies("FontAwesome");
 
-            manifest.DefineScript("MediumVendorJs").SetUrl("medium/medium-editor.min.js", "medium/medium-editor.js");
-            manifest.DefineStyle("MediumVendorCss").SetUrl("medium/medium-editor.min.css", "medium/medium-editor.css");
-            manifest.DefineStyle("MediumVendorCssTheme").SetUrl("medium/themes/default.min.css", "medium/themes/default.css");
+            manifest.DefineScript("MediumVendorJs").SetUrl(CacheBust("medium/medium-editor.min.js"), "medium/medium-editor.js");
+            manifest.DefineStyle("MediumVendorCss").SetUrl(CacheBust("medium/medium-editor.min.css"), "medium/medium-editor.css");
+            manifest.DefineStyle("MediumVendorCssTheme").SetUrl(CacheBust("medium/themes/default.min.css"), "medium/themes/default.css");
 
-            manifest.DefineScript("EditorJs").SetUrl("orchard.editor.min.js", "orchard.editor.js").SetDependencies(new string[] { "AceVendorJs", "BeautifyVendorJs" });
-            manifest.DefineScript("EditorEmbedJs").SetUrl("orchard.medium.embed.min.js", "orchard.medium.embed.js");
-            manifest.DefineStyle("EditorStyles").SetUrl("Styles.min.css", "Styles.css");
+            manifest.DefineScript("EditorJs").SetUrl(CacheBust("orchard.editor.min.js"), "orchard.editor.js").SetDependencies(new string[] { "AceVendorJs", "BeautifyVendorJs" });
+            manifest.DefineScript("EditorEmbedJs").SetUrl(CacheBust("orchard.medium.embed.min.js"), "orchard.medium.embed.js");
+            manifest.DefineStyle("EditorStyles").SetUrl(CacheBust("Styles.min.css"), "Styles.css");
+        }
+
+        private string CacheBust(string url)
+        {
+            return string.Format("{0}?v={1}", url, VERSION);
         }
     }
 }

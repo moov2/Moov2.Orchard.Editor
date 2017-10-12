@@ -7,6 +7,17 @@
         $element, $contentCss;
 
     /**
+     * Add extra paragraph if needed
+     */
+    var addExtraParagraph = function (value) {
+        if(!value || !value.endsWith('</p>')) {
+            value = value + '<p><br /></p>';
+        }
+
+        return value;
+    };
+
+    /**
      * Store DOM elements in variables.
      */
     var cacheDom = function () {
@@ -25,6 +36,7 @@
      * Initialises Medium editor.
      */
     var initialise = function (data) {
+        data.value = addExtraParagraph(data.value);
         $element.value = data.value;
         editorInstance = new MediumEditor($element);
 
@@ -49,6 +61,7 @@
     /**
      * Process message from the parent window.
      */
+    
     var onMessage = function (e) {
         var data = JSON.parse(e.data);
 
@@ -63,14 +76,18 @@
      * Receives a message from parent window to update value.
      */
     var receivedUpdate = function (data) {
+        var isEmpty = data.value === '';
+
         if (!hasInit) {
             initialise(data);
-            setFocus();
-            return;
         }
 
+        data.value = addExtraParagraph(data.value);
         editorInstance.setContent(data.value);
-        setFocus();
+
+        if (isEmpty) {
+            setFocus();
+        }
     };
 
     /**
