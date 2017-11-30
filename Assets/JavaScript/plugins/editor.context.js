@@ -45,13 +45,20 @@ window.Editor.plugins.push({
             instance.$el.classList.remove(CSS_CODE_EDITOR);
             instance.$el.classList.add(CSS_VISUAL_EDITOR);
         };
-
+        
+        if (instance.$el.classList.contains(CSS_VISUAL_EDITOR)) {
+            toggleCodeEditor();
+            return;
+        }
 
         if (instance.$el.classList.contains(CSS_CODE_EDITOR)) {
             toggleVisualEditor();
             return;
         }
 
-        toggleCodeEditor();
+        // Initialise first time
+        setTimeout(function() { 
+            toggleVisualEditor();
+        }, 2000);
     }
 });
