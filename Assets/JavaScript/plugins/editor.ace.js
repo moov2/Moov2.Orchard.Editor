@@ -56,6 +56,10 @@ window.Editor.plugins.push({
          */
         var init = function () {
             editor = ace.edit(getTextArea().id);
+            editor.setOptions({
+                maxLines: Infinity
+            });
+
             session = editor.getSession();
 
             $input = instance.$el.querySelector('.editor-input');
