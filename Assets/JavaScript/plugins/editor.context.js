@@ -8,6 +8,7 @@ window.Editor.plugins.push({
     exec: function (instance) {
         var CSS_CODE_EDITOR = 'is-code-editor',
             CSS_VISUAL_EDITOR = 'is-visual-editor',
+            hasReceivedInit = false,
             $visualIFrame = instance.$el.querySelector('.js-editor-visual-iframe');
 
         /**
@@ -17,8 +18,24 @@ window.Editor.plugins.push({
             return document.querySelector('.js-editor-content-type').value;
         };
 
+        var onMessage = function (e) {
+            if (!hasReceivedInit && e.data.action === 'init') {
+                hasReceivedInit = true;
+                sendInitInfo();
+            }
+        };
+
         var sendMessage = function (msg) {
             $visualIFrame.contentWindow.postMessage(JSON.stringify(msg), '*');
+        };
+
+        var sendInitInfo = function () {
+            sendMessage({
+                action: 'update',
+                value: instance.$input.value,
+                mediaPath: getContentType(),
+                id: instance.id
+            });
         };
 
         var toggleCodeEditor = function () {
@@ -32,15 +49,7 @@ window.Editor.plugins.push({
          * Displays visual editor.
          */
         var toggleVisualEditor = function () {
-            // send information to iframe.
-            var message = {
-                action: 'update',
-                value: instance.$input.value,
-                mediaPath: getContentType(),
-                id: instance.id
-            };
-
-            $visualIFrame.contentWindow.postMessage(JSON.stringify(message), '*');
+            sendInitInfo();
 
             instance.$el.classList.remove(CSS_CODE_EDITOR);
             instance.$el.classList.add(CSS_VISUAL_EDITOR);
@@ -56,9 +65,8 @@ window.Editor.plugins.push({
             return;
         }
 
-        // Initialise first time
-        setTimeout(function() { 
-            toggleVisualEditor();
-        }, 2000);
+        toggleVisualEditor();
+
+        window.addEventListener('message', onMessage);
     }
 });

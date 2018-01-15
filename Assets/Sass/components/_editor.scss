@@ -48,10 +48,14 @@
     }
 
     .editor__code {
-        display: block;
+        display: none;
         z-index: 80;
         overflow-y: scroll;
         overflow-x: hidden;
+
+        .is-code-editor & {
+            display: block;
+        }
     }
 
         .editor__code .ace_editor {
@@ -67,14 +71,14 @@
         }
 
     .editor__visual {
-        display: none;
+        display: block;
         z-index: 100;
 
         background-color: white;
         border: 1px solid $editor-border-color;
 
-        .is-visual-editor & {
-            display: block;
+        .is-code-editor & {
+            display: none;
         }
     }
 

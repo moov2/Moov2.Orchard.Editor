@@ -25,6 +25,17 @@
         $contentCss = document.querySelector('.js-editor-custom-css');
     };
 
+    var loaded = function () {
+        cacheDom();
+
+        if (!hasInit) {
+            sendMessage({
+                action: 'init',
+                id: instanceId
+            });
+        }
+    };
+
     /**
      * Gets the value.
      */
@@ -54,6 +65,10 @@
                 orchardMedia: true
             }
         });
+
+        if (editorInstance.elements && editorInstance.elements.length > 0) {
+            editorInstance.elements[0].style.display = 'block';
+        }
 
         hasInit = true;
     };
@@ -120,6 +135,6 @@
         MediumEditor.selection.moveCursor(document, editorInstance.elements[0], 0);
     };
     
-    document.addEventListener('DOMContentLoaded', cacheDom);
+    document.addEventListener('DOMContentLoaded', loaded);
     window.addEventListener('message', onMessage);
 })();
