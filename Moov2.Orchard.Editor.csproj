@@ -107,8 +107,10 @@
     <Content Include="Assets\JavaScript\plugins\editor.ace.js" />
     <Content Include="Assets\JavaScript\plugins\editor.context.js" />
     <Content Include="Assets\JavaScript\plugins\editor.fullscreen.js" />
+    <Content Include="Assets\JavaScript\plugins\editor.insertEmbed.js" />
     <Content Include="Assets\JavaScript\plugins\editor.insertMedia.js" />
     <Content Include="Assets\JavaScript\plugins\editor.resizer.js" />
+    <Content Include="Assets\JavaScript\plugins\editor.visual.insertMedia.js" />
     <Content Include="Content\icon-face.svg" />
     <Content Include="Content\icon-fullscreen.svg" />
     <Content Include="Content\icon-insert-photo.svg" />

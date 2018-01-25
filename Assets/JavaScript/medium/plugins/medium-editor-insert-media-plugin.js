@@ -50,40 +50,11 @@
      */
 
     OrchardMedia.prototype.add = function () {
-        var adminIndex = location.href.toLowerCase().indexOf("/admin/"),
-            _this = this,
-            url;
-
-        if (adminIndex === -1) {
-            return;
-        }
-
-        url = location.href.substr(0, adminIndex) + "/Admin/Orchard.MediaLibrary?dialog=true";
-
-        $.colorbox({
-            href: url,
-            iframe: true,
-            reposition: true,
-            width: '90%',
-            height: '90%',
-            onLoad: function () {
-                // hide the scrollbars from the main window
-                $('html, body').css('overflow', 'hidden');
-            },
-            onClosed: function () {
-                var selectedData = $.colorbox.selectedData;
-
-                if (!selectedData || selectedData.length === 0) {
-                    return;
-                }
-
-                _this.addMedia(selectedData);
-
-                $('html, body').css('overflow', '');
-            }
-        });
+        window.parent.postMessage({
+            action: 'begin-insert-media',
+            id: this.$el.data('instance-id')
+        }, '*');
     };
-
 
     OrchardMedia.prototype.addImage = function (image, isSelect) {
         var $place = this.$el.find('.medium-insert-active');
@@ -166,11 +137,18 @@
      */
 
     OrchardMedia.prototype.events = function () {
-        $(document)
-            .on('click', $.proxy(this, 'unselectImage'));
+        var _this = this;
 
-        this.$el
-            .on('click', 'figure img', $.proxy(this, 'selectImage'));
+        $(document).on('click', $.proxy(this, 'unselectImage'));
+        this.$el.on('click', 'figure img', $.proxy(this, 'selectImage'));
+
+        window.addEventListener('message', function (e) {
+            var data = JSON.parse(e.data);
+
+            if (data.id === _this.$el.data('instance-id') && data.action === 'insert-media') {
+                _this.addMedia(data.selectedMedia);
+            }
+        });
     };
 
     /**

@@ -8,6 +8,7 @@
       "Assets/JavaScript/plugins/editor.insertEmbed.js",
       "Assets/JavaScript/plugins/editor.insertMedia.js",
       "Assets/JavaScript/plugins/editor.resizer.js",
+      "Assets/JavaScript/plugins/editor.visual.insertMedia.js",
       "Assets/JavaScript/orchard.editor.instance.js"
     ],
     "output": "Scripts/orchard.editor.js"

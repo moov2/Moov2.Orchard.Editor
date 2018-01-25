@@ -1,13 +1,29 @@
 /**
- * Inserts media into the editor from the Orchard media library.
+ * Handles inserting media via the visual editor.
  */
 
 window.Editor.plugins.push({
-    action: 'insert-media',
-    init: false,
+    action: 'visualInsertMedia',
+    init: true,
     exec: function (instance) {
+        var _this = this;
+        
+        window.addEventListener('message', function (e) {
+            if (e.data.id !== instance.id) {
+                return;
+            }
+
+            if (e.data.action === 'begin-insert-media') {
+                _this.insertMedia(instance);
+                return;
+            }
+        });
+    },
+
+    insertMedia: function (instance) {
         var adminIndex = location.href.toLowerCase().indexOf("/admin/"),
-            cachedScrollPosition = 0;
+            cachedScrollPosition = 0,
+            _this = this;
 
         if (adminIndex === -1) {
             return;
@@ -21,6 +37,7 @@ window.Editor.plugins.push({
             height: '90%',
             onLoad: function () {
                 cachedScrollPosition = $('html').scrollTop();
+
                 // hide the scrollbars from the main window
                 $('html, body').css('overflow', 'hidden');
             },
@@ -33,12 +50,12 @@ window.Editor.plugins.push({
                 if (!selectedData || selectedData.length === 0) {
                     return;
                 }
-                
-                instance.$el.dispatchEvent(new CustomEvent('editor:addMedia', {
-                    detail: {
-                        mediaItems: selectedData
-                    }
-                }));
+
+                instance.sendMessage({
+                    action: 'insert-media',
+                    selectedMedia: selectedData,
+                    id: instance.id
+                });
             }
         });
     }

@@ -57,6 +57,8 @@
             editorInstance.elements[0].className += ' ' + $contentCss.value;
         }
 
+        editorInstance.elements[0].setAttribute('data-instance-id', instanceId);
+
         $($element).mediumInsert({
             editor: editorInstance,
             addons: {

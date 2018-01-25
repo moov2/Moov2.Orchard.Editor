@@ -19,6 +19,7 @@ window.Editor.plugins.push({
 
         var onDrag = function (e) {
             instance.$el.style.height = (initialHeight + (e.clientY - initialY)) + 'px';
+            instance.$el.dispatchEvent(new CustomEvent('resize'));
         };
 
         var onIFrameDrag = function (e) {

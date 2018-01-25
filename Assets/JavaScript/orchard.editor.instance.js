@@ -1,8 +1,13 @@
 ﻿(function () {
     var editorInstance = function ($el) {
-        var state = {
+        var instance = {
             $el: $el,
-            id: $el.getAttribute('data-id')
+            $visual: $el.querySelector('.js-editor-visual-iframe'),
+            id: $el.getAttribute('data-id'),
+
+            sendMessage: function (data) {
+                this.$visual.contentWindow.postMessage(JSON.stringify(data), '*'); 
+            }
         };
 
         /**
@@ -14,7 +19,7 @@
 
             for (var i = 0; i < plugins.length; i++) {
                 if (plugins[i].action === action) {
-                    plugins[i].exec(state);
+                    plugins[i].exec(instance);
                     return;
                 }
             }
@@ -24,7 +29,7 @@
          * Initialises Medium editor.
          */
         var init = function () {
-            state.$input = $el.querySelector('.editor-input');
+            instance.$input = $el.querySelector('.editor-input');
 
             var $actions = $el.querySelectorAll('.js-toolbar-btn');
 
@@ -38,7 +43,7 @@
             // exec on initialise.
             for (var i = 0; i < window.Editor.plugins.length; i++) {
                 if (window.Editor.plugins[i].init) {
-                    window.Editor.plugins[i].exec(state);
+                    window.Editor.plugins[i].exec(instance);
                 }
             }
         };
@@ -47,12 +52,12 @@
          * Received a message from the iframe editor.
          */
         var onMessage = function (e) {
-            if (e.data.id !== state.id) {
+            if (e.data.id !== instance.id) {
                 return;
             }
-
+            
             if (e.data.action === 'update') {
-                state.$input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
+                instance.$input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 $el.dispatchEvent(new Event('editor:valueUpdate'));
             }
         };
