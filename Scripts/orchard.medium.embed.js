@@ -13,7 +13,7 @@
      * Add extra paragraph if needed
      */
     var addExtraParagraph = function (value) {
-        if(!value || !value.endsWith('</p>')) {
+        if (!value || !value.endsWith('</p>')) {
             value = value + '<p><br /></p>';
         }
 
@@ -51,7 +51,14 @@
      * Gets the value.
      */
     var getValue = function () {
-        return editorInstance.serialize()[editorInstance.elements[0].id].value;
+        var value = editorInstance.serialize()[editorInstance.elements[0].id].value,
+            replace = '<p><br></p>';
+
+        if (value.substring(value.length - replace.length, value.length) === replace) {
+            value = value.substring(0, value.length - replace.length);
+        }
+
+        return value;
     };
     
     /**
