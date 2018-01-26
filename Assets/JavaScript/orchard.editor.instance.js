@@ -38,6 +38,7 @@
             }
 
             window.addEventListener('message', onMessage);
+            instance.$input.addEventListener('change', update);
 
             // loop over plugins and execute any that are flagged to
             // exec on initialise.
@@ -60,6 +61,17 @@
                 instance.$input.value = html_beautify ? html_beautify(e.data.value, { wrap_line_length: 0 }) : e.data.value;
                 $el.dispatchEvent(new Event('editor:valueUpdate'));
             }
+        };
+
+        /**
+         * 
+         */
+        var update = function () {
+            instance.sendMessage({
+                action: 'update',
+                value: instance.$input.value,
+                id: instance.id
+            });
         };
 
         init();
