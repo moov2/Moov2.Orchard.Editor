@@ -18,7 +18,7 @@ window.Editor.plugins.push({
         };
 
         var onMessage = function (e) {
-            if (!hasReceivedInit && e.data.action === 'init') {
+            if (!hasReceivedInit && e.data.id === instance.id && e.data.action === 'init') {
                 hasReceivedInit = true;
                 sendInitInfo();
             }

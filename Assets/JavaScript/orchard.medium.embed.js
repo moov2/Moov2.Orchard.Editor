@@ -1,9 +1,7 @@
 ﻿(function () {
-    var KEY_ESC = 27,
-        UPLOAD_MEDIA_URL = '/Admin/Editor/Media';
-
     var hasInit = false,
-        editorInstance, instanceId,
+        instanceId,
+        editorInstance,
         $element, $contentCss;
 
     /**
@@ -23,6 +21,14 @@
     var cacheDom = function () {
         $element = document.querySelector('.js-editor-medium-element');
         $contentCss = document.querySelector('.js-editor-custom-css');
+    };
+
+    var getInstanceId = function () {
+        var name = 'instance';
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     };
 
     var loaded = function () {
@@ -56,7 +62,7 @@
         if ($contentCss.value !== '') {
             editorInstance.elements[0].className += ' ' + $contentCss.value;
         }
-
+        
         editorInstance.elements[0].setAttribute('data-instance-id', instanceId);
 
         $($element).mediumInsert({
@@ -81,8 +87,6 @@
     
     var onMessage = function (e) {
         var data = JSON.parse(e.data);
-
-        instanceId = data.id;
 
         if (data.action === 'update') {
             receivedUpdate(data);
@@ -136,6 +140,8 @@
         editorInstance.selectElement(editorInstance.elements[0]);
         MediumEditor.selection.moveCursor(document, editorInstance.elements[0], 0);
     };
+
+    instanceId = getInstanceId();
     
     document.addEventListener('DOMContentLoaded', loaded);
     window.addEventListener('message', onMessage);
