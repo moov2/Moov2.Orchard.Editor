@@ -97,7 +97,8 @@
      * Receives a message from parent window to update value.
      */
     var receivedUpdate = function (data) {
-        var isEmpty = data.value === '';
+        var isEmpty = data.value === '',
+            isInitialUpdate = !hasInit;
 
         if (!hasInit) {
             initialise(data);
@@ -106,7 +107,7 @@
         data.value = addExtraParagraph(data.value);
         editorInstance.setContent(data.value);
 
-        if (isEmpty) {
+        if (isEmpty && !isInitialUpdate) {
             setFocus();
         }
     };
