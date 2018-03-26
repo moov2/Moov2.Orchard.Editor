@@ -159,8 +159,8 @@
     <Content Include="Styles\medium\themes\roman.min.css" />
     <Content Include="Styles\medium\themes\tim.css" />
     <Content Include="Styles\medium\themes\tim.min.css" />
-    <Content Include="Styles\Styles.css" />
-    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Styles\Moov2.Editor.css" />
+    <Content Include="Styles\Moov2.Editor.min.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Module.txt" />
@@ -219,7 +219,7 @@
     <Content Include="Assets\Sass\components\_resizer.scss" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Sass\Styles.scss" />
+    <Content Include="Assets\Sass\Moov2.Editor.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

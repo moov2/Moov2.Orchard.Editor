@@ -31,7 +31,7 @@ namespace Moov2.Orchard.Editor
 
             manifest.DefineScript("EditorJs").SetUrl(CacheBust("orchard.editor.min.js"), "orchard.editor.js").SetDependencies(new string[] { "AceVendorJs", "BeautifyVendorJs" });
             manifest.DefineScript("EditorEmbedJs").SetUrl(CacheBust("orchard.medium.embed.min.js"), "orchard.medium.embed.js");
-            manifest.DefineStyle("EditorStyles").SetUrl(CacheBust("Styles.min.css"), "Styles.css");
+            manifest.DefineStyle("EditorStyles").SetUrl(CacheBust("Moov2.Editor.min.css"), "Moov2.Editor.css");
         }
 
         private string CacheBust(string url)

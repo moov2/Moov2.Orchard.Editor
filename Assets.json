@@ -27,8 +27,8 @@
   },
   {
     "inputs": [
-      "Assets/Sass/Styles.scss"
+      "Assets/Sass/Moov2.Editor.scss"
     ],
-    "output": "Styles/Styles.css"
+    "output": "Styles/Moov2.Editor.css"
   }
 ]
